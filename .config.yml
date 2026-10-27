@@ -81,5 +81,5 @@ documentation:
   path: documentation
   relative-paths:
     partials: _partials
-    screenshots: documentation/screenshots
-    main-screenshot: documentation/screenshots/main.png
+    screenshots: screenshots
+    main-screenshot: screenshots/main.png
