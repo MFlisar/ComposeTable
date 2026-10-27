@@ -154,9 +154,9 @@ See the [getting started guide](documentation/Guides/getting-started.md) and
 Browse following guides for more details.
 
 - Modules
-  - [Core](documentation/Modules/core.md)
-  - [Material 3](documentation/Modules/material3.md)
-  - [Styled](documentation/Modules/styled.md)
+  - [ComposeTable Core](documentation/Modules/core.md)
+  - [Material 3 Module](documentation/Modules/material3.md)
+  - [Styled Module](documentation/Modules/styled.md)
 - Guides
   - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
   - [Filtering and Search](documentation/Guides/filtering-and-search.md)
