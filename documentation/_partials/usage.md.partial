@@ -1,0 +1,19 @@
+#### Basic usage
+
+Add the `core` module and the implementation module for the theme you want to use.
+Wrap your UI in `StyledTheme`, then use the shared `Styled*` components. The active
+theme supplies their appearance and behavior.
+
+```kotlin
+StyledTheme(
+    platform = platform,
+    theme = rememberMaterial3Theme(),
+) {
+    StyledButton(onClick = { /* Handle the action */ }) {
+        StyledText("Continue")
+    }
+}
+```
+
+Browse the [component guides](documentation/Components/), [module overviews](documentation/Modules/)
+and [advanced guides](documentation/Advanced/) for details.

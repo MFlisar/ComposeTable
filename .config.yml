@@ -1,0 +1,89 @@
+# ---------------------
+# Publishing configuration
+# ---------------------
+
+publish:
+  group-id: io.github.mflisar.composetable
+  github:
+    user: MFlisar
+    repo: maven-repository
+    branch: main
+    path: artifacts
+  target: github # [none, maven-central, github]
+
+# ---------------------
+# General configuration
+# ---------------------
+
+config:
+  java-version: 17
+  developer:
+    name: Michael Flisar
+    mail: mflisar.development@gmail.com
+    maven-id: mflisar
+    github-user-name: MFlisar
+
+# ---------------------
+# Project
+# ---------------------
+
+project:
+  namespace: com.michaelflisar.composetable
+  repo-name: ComposeTable
+  release: 2026
+  license:
+    name: Apache License 2.0
+    path: blob/main/LICENSE
+
+# ---------------------
+# APPS
+# ---------------------
+
+apps:
+  - name: Compose Table Demo
+    namespace: com.michaelflisar.composetable.demo
+    version-name: 1.0.0
+    path: demo/app/compose
+    publish-demo: true
+    publish-description: Open the interactive WASM demo
+  - name: Invalid Demo
+    namespace: com.michaelflisar.composetable.demo
+    version-name: 1.0.0
+    path: demo/app/compose
+    publish-demo: true
+    publish-description: Some description
+
+# ---------------------
+# Modules
+# ---------------------
+
+modules:
+  # used to detect latest release version of the library (dynamically on the published homepage)
+  primary-artifact-id: core
+  # Modules - list of modules [artifact-id, description, path, (plugin)]
+  modules:
+    - artifact-id: core
+      description: the core module
+      path: library/core
+    - artifact-id: material3
+      description: a material3 implementation
+      path: library/implementations/material3
+    - artifact-id: styled
+      description: a ComposeStyled implementation
+      path: library/implementations/styled
+  # XCFrameworks [name, path, targets (ios, macos)]
+  xcframeworks: []
+
+# ---------------------
+# Readme Generation
+# ---------------------
+
+documentation:
+  root-path: documentation
+  folder-partials: _partials
+  folder-screenshots: screenshots
+  main-screenshot-path:
+  sorted-folder:
+    - Modules
+    - Compounds
+    - Advanced

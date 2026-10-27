@@ -1,0 +1,97 @@
+[versions]
+
+# Google
+google-ads =	                "25.4.0"
+google-ump =	                "4.0.0"
+google-guava =					"33.7.1-android"
+
+# Windows UI
+jewel =                         "0.35.0-261.23567.198" # 0.37 uses already java 25
+intellij-platform =             "251.23774.444"
+#skiko =                         "0.9.2"
+
+# Compose
+compose-icons = 		        "1.1.1"
+voyager = 				        "2.2.21-1.10.3"
+#composables =                   "1.49.6"
+
+# Others
+openiap =                       "3.5.0" # ACHTUNG: wird im build.gradle.kts manuell definiert, das hier ist eigentlich ungenutzt!
+stately =                       "2.1.0"
+acra =		        		    "5.13.1"
+processphoenix = 			    "3.0.0"
+htmlconverter =                 "1.1.1"
+filekit =                       "0.16.0"
+accompanist = 			        "0.37.3"
+csv =                           "1.14.1"
+ktor =                          "3.5.2"
+coil =						    "3.6.2"
+coil-transform =			    "3.0.0"
+basic-ads =                     "1.2.1"
+poi =                           "5.5.1"
+
+[plugins]
+
+# --
+
+[libraries]
+
+# Google
+google-ads =			     					{ module = "com.google.android.gms:play-services-ads", 								version.ref = "google-ads" }
+google-ump =			     					{ module = "com.google.android.ump:user-messaging-platform", 						version.ref = "google-ump" }
+google-guava =			     					{ module = "com.google.guava:guava", 												version.ref = "google-guava" }
+
+# Windows UI
+jewel-int-ui-standalone =                       { module = "org.jetbrains.jewel:jewel-int-ui-standalone",                           version.ref = "jewel" }
+jewel-int-ui-decorated-window =                 { module = "org.jetbrains.jewel:jewel-int-ui-decorated-window",                     version.ref = "jewel" }
+#jewel-foundation =                              { module = "org.jetbrains.jewel:jewel-foundation",                                  version.ref = "jewel" }
+#jewel-decorated-window =                        { module = "org.jetbrains.jewel:jewel-decorated-window",                            version.ref = "jewel" }
+#jewel-ui =                                      { module = "org.jetbrains.jewel:jewel-ui",                                          version.ref = "jewel" }
+intellij-platform-icons =                       { module = "com.jetbrains.intellij.platform:icons",                                 version.ref = "intellij-platform" }
+#skiko =                                         { module = "org.jetbrains.skiko:skiko-awt-runtime-all",                             version.ref = "skiko" }
+
+# Compose
+icons-cssgg = 					                { module = "br.com.devsrsouza.compose.icons:css-gg", 						        version.ref = "compose-icons" }
+icons-weathericons = 			                { module = "br.com.devsrsouza.compose.icons:erikflowers-weather-icons", 	        version.ref = "compose-icons" }
+icons-evaicons = 				                { module = "br.com.devsrsouza.compose.icons:eva-icons", 					        version.ref = "compose-icons" }
+icons-feather = 				                { module = "br.com.devsrsouza.compose.icons:feather", 						        version.ref = "compose-icons" }
+icons-fontawesome = 			                { module = "br.com.devsrsouza.compose.icons:font-awesome", 					        version.ref = "compose-icons" }
+icons-lineawesome = 			                { module = "br.com.devsrsouza.compose.icons:line-awesome", 					        version.ref = "compose-icons" }
+icons-linea = 					                { module = "br.com.devsrsouza.compose.icons:linea", 						        version.ref = "compose-icons" }
+icons-octicons = 				                { module = "br.com.devsrsouza.compose.icons:octicons", 						        version.ref = "compose-icons" }
+icons-simpleicons = 			                { module = "br.com.devsrsouza.compose.icons:simple-icons", 					        version.ref = "compose-icons" }
+icons-tablericons = 			                { module = "br.com.devsrsouza.compose.icons:tabler-icons", 					        version.ref = "compose-icons" }
+voyager-navigator = 		                    { module = "cafe.adriel.voyager:voyager-navigator", 						        version.ref = "voyager" }
+voyager-bottomsheet = 		                    { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", 			        version.ref = "voyager" }
+voyager-tabs = 				                    { module = "cafe.adriel.voyager:voyager-tab-navigator", 					        version.ref = "voyager" }
+voyager-transitions = 		                    { module = "cafe.adriel.voyager:voyager-transitions", 						        version.ref = "voyager" }
+voyager-screenmodel = 		                    { module = "cafe.adriel.voyager:voyager-screenmodel", 						        version.ref = "voyager" }
+#composables-core =                              { module = "com.composables:core", 		                                	        version.ref = "composables" }
+
+# Others
+openiap =                                       { module = "io.github.hyochan:kmp-iap", 								            version.ref = "openiap" }
+openiap-android =                               { module = "io.github.hyochan:kmp-iap-android-play", 								version.ref = "openiap" }
+openiap-iosarm64 =                              { module = "io.github.hyochan:kmp-iap-iosarm64", 								    version.ref = "openiap" }
+openiap-iossimulatorarm64 =                     { module = "io.github.hyochan:kmp-iap-iossimulatorarm64", 						    version.ref = "openiap" }
+stately =                                       { module = "co.touchlab:stately-concurrency", 		                                version.ref = "stately" }
+acra-core =			                			{ module = "ch.acra:acra-core", 									    			version.ref = "acra" }
+acra-mail =			            			    { module = "ch.acra:acra-mail", 									    			version.ref = "acra" }
+acra-dialog =			        			    { module = "ch.acra:acra-dialog", 									    			version.ref = "acra" }
+processphoenix =              				    { module = "com.jakewharton:process-phoenix", 										version.ref = "processphoenix" }
+htmlconverter =                                 { module = "be.digitalia.compose.htmlconverter:htmlconverter", 			            version.ref = "htmlconverter" }
+filekit-dialogs-compose =                       { module = "io.github.vinceglb:filekit-dialogs-compose",                            version.ref  = "filekit" }
+filekit-coil =                                  { module = "io.github.vinceglb:filekit-coil",                                       version.ref  = "filekit" }
+accompanist-permission = 			            { module = "com.google.accompanist:accompanist-permissions", 				        version.ref = "accompanist" }
+accompanist-drawablepainter = 		            { module = "com.google.accompanist:accompanist-drawablepainter", 		            version.ref = "accompanist" }
+csv =                                           { module = "org.apache.commons:commons-csv",                                        version.ref = "csv" }
+ktor-client-android =					        { module = "io.ktor:ktor-client-android", 							                version.ref = "ktor" }
+ktor-client-darwin =					        { module = "io.ktor:ktor-client-darwin", 							                version.ref = "ktor" }
+ktor-client-java =					            { module = "io.ktor:ktor-client-java", 							                    version.ref = "ktor" }
+ktor-client-apache5 =					        { module = "io.ktor:ktor-client-apache5", 							                version.ref = "ktor" }
+coil-core =					        	        { module = "io.coil-kt.coil3:coil-core", 							                version.ref = "coil" }
+coil-compose =					        	    { module = "io.coil-kt.coil3:coil-compose", 							            version.ref = "coil" }
+coil-network-ktor3 =					        { module = "io.coil-kt.coil3:coil-network-ktor3", 							        version.ref = "coil" }
+coil-transformations =	        			    { module = "com.github.Commit451.coil-transformations:transformations", 			version.ref = "coil-transform" }
+basic-ads =	        			                { module = "app.lexilabs.basic:basic-ads", 			                                version.ref = "basic-ads" }
+poi =					                        { module = "org.apache.poi:poi", 									                version.ref = "poi" }
+poi-ooxml =					                    { module = "org.apache.poi:poi-ooxml", 									            version.ref = "poi" }

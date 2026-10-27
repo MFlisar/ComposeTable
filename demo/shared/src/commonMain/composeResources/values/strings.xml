@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- pages -->
+    <string name="page_home">Home</string>
+    <string name="page_states">States</string>
+    <string name="page_settings">Settings</string>
+
+
+</resources>
