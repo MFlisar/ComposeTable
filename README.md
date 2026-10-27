@@ -1,4 +1,4 @@
-[![MFlisar/maven-repository](https://img.shields.io/badge/MFlisar-maven--repository-brightgreen?color=blue)](https://MFlisar.github.io/maven-repository) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
+[![MFlisar/maven-repository](https://img.shields.io/badge/MFlisar-maven--repository-brightgreen?color=blue)](https://MFlisar.github.io/maven-repository) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeTable
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
@@ -8,9 +8,10 @@ paging, and selection, with a pluggable UI provider.
 
 [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo/)
 
+![Screenshot](documentation/screenshots/main.png)
+
 # Table of Contents
 
-- [Screenshots](#camera-screenshots)
 - [Supported Platforms](#computer-supported-platforms)
 - [Versions](#arrow_right-versions)
 - [Setup](#wrench-setup)
@@ -18,10 +19,6 @@ paging, and selection, with a pluggable UI provider.
 - [Demo](#sparkles-demo)
 - [API](#books-api)
 - [Other Libraries](#bulb-other-libraries)
-
-# :camera: Screenshots
-
-![Screenshot](documentation/screenshots/main.png)
 
 # :computer: Supported Platforms
 
@@ -151,28 +148,15 @@ rendering `PeopleTable`, configure the UI once with
 
 Browse the documentation for setup and details:
 
-- Guides
+- General
   - [Getting Started](documentation/Guides/getting-started.md)
-  - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
-  - [Filtering and Search](documentation/Guides/filtering-and-search.md)
-  - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
-  - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
-  - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
 - Modules
   - [Core](documentation/Modules/core.md)
   - [Material 3](documentation/Modules/material3.md)
   - [Styled](documentation/Modules/styled.md)
-
-Browse following guides for more details.
-
-- Modules
-  - [ComposeTable Core](documentation/Modules/core.md)
-  - [Material 3 Module](documentation/Modules/material3.md)
-  - [Styled Module](documentation/Modules/styled.md)
-- Guides
+- Advanced
   - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
   - [Filtering and Search](documentation/Guides/filtering-and-search.md)
-  - [Getting Started](documentation/Guides/getting-started.md)
   - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
   - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
   - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
