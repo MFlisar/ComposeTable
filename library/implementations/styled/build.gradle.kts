@@ -28,16 +28,7 @@ plugins {
 
 val module = LibraryModuleConfig.read(project)
 
-val buildTargets = Targets(
-    // mobile
-    android = true,
-    iOS = true,
-    // desktop
-    windows = true,
-    macOS = true,
-    // web
-    wasm = true
-)
+val buildTargets = Targets(Platform.ANDROID, Platform.IOS, Platform.WINDOWS, Platform.MACOS, Platform.WASM)
 
 val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,

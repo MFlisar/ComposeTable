@@ -2,7 +2,13 @@ import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.core.Platform
 import com.michaelflisar.kmpdevtools.configs.*
+import com.michaelflisar.kmpdevtools.isDebug
+import com.michaelflisar.kmpdevtools.isExe
+import com.michaelflisar.kmpdevtools.setupBuildKonfig
 import com.michaelflisar.kmpdevtools.setupDependencies
+import com.michaelflisar.kmpdevtools.setupBuildKonfig
+import com.michaelflisar.kmpdevtools.isDebug
+import com.michaelflisar.kmpdevtools.isExe
 
 plugins {
     // kmp + app/library
@@ -18,27 +24,18 @@ plugins {
     // build tools
     alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
-    // ...
+    alias(libs.plugins.buildkonfig)
 }
 
 // ------------------------
 // Setup
 // ------------------------
 
-val module = LibraryModuleConfig.readManual(project)
+val module = LibraryModuleConfig.read(project)
 
-val buildTargets = Targets(
-    // mobile
-    android = true,
-    //iOS = true,
-    // desktop
-    windows = true,
-    //macOS = true,
-    // web
-    wasm = true
-)
+val buildTargets = Targets(Platform.ANDROID, Platform.IOS, Platform.WINDOWS, Platform.MACOS, Platform.WASM)
 
-val androidConfig = AndroidLibraryConfig.createFromPath(
+val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
@@ -48,6 +45,15 @@ val androidConfig = AndroidLibraryConfig.createFromPath(
 // ------------------------
 // Kotlin
 // ------------------------
+
+buildkonfig {
+    setupBuildKonfig(
+        project = project,
+        config = module.config,
+        isDebug = isDebug(project),
+        isExe = isExe(project),
+    )
+}
 
 compose.resources {
     packageOfResClass = "${module.projectNamespace}.demo.shared.resources"

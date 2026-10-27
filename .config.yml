@@ -43,17 +43,14 @@ apps:
   - name: Compose Table Demo
     namespace: com.michaelflisar.composetable.demo
     version-name: 1.0.0
-    path: demo/app/compose
-    publish-app: true
-    publish-path: demo
-    publish-description: Explore in the interactive demo
-  - name: Compose Table Demo 2 (same app for testing)
-    namespace: com.michaelflisar.composetable.demo
-    version-name: 1.0.0
-    path: demo/app/compose
-    publish-app: true
-    publish-path: demo2
-    publish-description: Explore in the interactive demo 2
+    module-paths:
+      - demo/app/web
+      - demo/app/windows
+      - demo/shared
+    publish:
+      url-path: demo
+      description: Explore the interactive demo
+      module-path: demo/app/web
 
 # ---------------------
 # Modules
@@ -81,7 +78,8 @@ modules:
 # ---------------------
 
 documentation:
-  root-path: documentation
-  folder-partials: _partials
-  folder-screenshots: screenshots
-  main-screenshot-path: main.png
+  path: documentation
+  relative-paths:
+    partials: _partials
+    screenshots: documentation/screenshots
+    main-screenshot: documentation/screenshots/main.png

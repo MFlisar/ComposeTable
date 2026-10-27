@@ -3,9 +3,6 @@ import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.core.Platform
 import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.setupDependencies
-import com.michaelflisar.kmpdevtools.setupBuildKonfig
-import com.michaelflisar.kmpdevtools.isDebug
-import com.michaelflisar.kmpdevtools.isExe
 
 plugins {
     // kmp + app/library
@@ -19,31 +16,16 @@ plugins {
     // build tools
     alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
-    alias(libs.plugins.buildkonfig)
-    alias(libs.plugins.launch4j)
+    // --
 }
 
 // ------------------------
 // Setup
 // ------------------------
 
-val module = AppModuleConfig.readManual(project)
+val module = AppModuleConfig.read(project)
 
-val buildTargets = Targets(
-    // mobile
-    //android = true,
-    //iOS = true,
-    // desktop
-    windows = true,
-    //macOS = true,
-    // web
-    wasm = true
-)
-
-val desktopConfig = DesktopAppConfig(
-    mainClass = "com.michaelflisar.demo.MainKt",
-    ico = "icon.ico"
-)
+val buildTargets = Targets(Platform.WASM)
 
 val wasmConfig = WasmAppConfig(
     moduleName = "demo",
@@ -53,15 +35,6 @@ val wasmConfig = WasmAppConfig(
 // -------------------
 // Kotlin
 // -------------------
-
-buildkonfig {
-    setupBuildKonfig(
-        project = project,
-        config = module.config,
-        isDebug = isDebug(project),
-        isExe = isExe(project),
-    )
-}
 
 kotlin {
 
@@ -111,19 +84,4 @@ kotlin {
 // Configurations
 // -------------------
 
-// windows configuration
-compose.desktop {
-    application {
-        BuildFileUtil.setupWindowsApp(
-            appModuleConfig = module,
-            application = this,
-            desktopAppConfig = desktopConfig
-        )
-    }
-}
-
-// THIN + FAT exe
-BuildFileUtil.registerLaunch4JTask(
-    appModuleConfig = module,
-    desktopAppConfig = desktopConfig
-)
+// --
