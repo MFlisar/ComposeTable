@@ -1,4 +1,4 @@
-[![MFlisar/maven-repository](https://img.shields.io/badge/MFlisar-maven--repository-brightgreen?color=blue)](https://MFlisar.github.io/maven-repository) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composetable/core?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composetable/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeTable
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
@@ -7,8 +7,7 @@ typed columns, local and provider-backed data, and built-in sorting, filtering,
 paging, and selection, with a pluggable UI provider.
 
 > [!TIP]
-> Try the interactive demo:
-
+> Try the interactive demo:>
 > [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo/)
 
 # :camera: Screenshot
@@ -17,7 +16,6 @@ paging, and selection, with a pluggable UI provider.
 
 # Table of Contents
 
-- [Screenshot](#camera-screenshot)
 - [Supported Platforms](#computer-supported-platforms)
 - [Versions](#arrow_right-versions)
 - [Setup](#wrench-setup)
@@ -43,23 +41,6 @@ paging, and selection, with a pluggable UI provider.
 | Jetbrains Compose Material3 | `1.9.0` |
 
 # :wrench: Setup
-
-<b>This library is not published on maven central</b>
-
-Instead it's published on GitHub, so you need to add the following repository to your settings.gradle.kts:
-
-```java
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-        // ADD THIS
-        maven("https://MFlisar.github.io/maven-repository/artifacts")
-        // ...
-    }
-}
-```
 
 <details open>
 
@@ -169,11 +150,11 @@ Browse the documentation for setup and details:
 
 # :sparkles: Demo
 
-A full [demo project]([demo/app/web, demo/app/windows, demo/shared]) is included.
+A [demo project]([demo/app/web, demo/app/windows, demo/shared]) is included.
 
 # :books: API
 
-Check out the [API documentation](https://MFlisar.github.io/ComposeTable/).
+Check out the [API documentation](https://MFlisar.github.io/ComposeTable/api/).
 
 # :bulb: Other Libraries
 
