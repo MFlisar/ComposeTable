@@ -1,3 +1,5 @@
+# ComposeTable Core
+
 ComposeTable Core provides the table composable, data models, typed columns,
 query and selection state, and the UI-provider contract. It is the base module
 for every ComposeTable table and does not depend on Material 3.
@@ -22,9 +24,9 @@ application; tables in the same process use that provider.
 
 ## Next steps
 
-- [Get started](../Guides/Getting%20Started.md) with a local table.
-- [Define columns](../Guides/Columns%20and%20Sorting.md) and add sorting and filtering.
-- [Load data on demand](../Guides/Provider-backed%20Data.md) with `TableDataProvider`.
-- [Customize UI and interactions](../Guides/UI%20Providers%20and%20Customization.md).
+- [Get started](../Guides/getting-started.md) with a local table.
+- [Define columns](../Guides/columns-and-sorting.md) and add sorting and filtering.
+- [Load data on demand](../Guides/provider-backed-data.md) with `TableDataProvider`.
+- [Customize UI and interactions](../Guides/ui-providers-and-customization.md).
 
 Core is configured for Android, iOS, Windows, macOS, and WebAssembly targets.

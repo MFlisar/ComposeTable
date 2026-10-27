@@ -1,6 +1,10 @@
+# Provider-backed Data
+
 Use the provider overload of `rememberTable` when the complete result set
 should not be held in memory. The table requests a count and loads ranges as
-rows become visible, while retaining a configurable cache.
+rows become visible, while retaining a configurable cache. The guides to
+[columns](columns-and-sorting.md) and [filtering](filtering-and-search.md)
+explain how those query settings are defined.
 
 ## Implement the provider contract
 

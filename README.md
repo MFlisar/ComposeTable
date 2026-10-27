@@ -148,22 +148,22 @@ private fun PeopleTable(people: List<Person>) {
 model's mutation methods or a new model when replacing the data. Before
 rendering `PeopleTable`, configure the UI once with
 `TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
-See the [getting started guide](documentation/Guides/Getting%20Started.md) and
+See the [getting started guide](documentation/Guides/getting-started.md) and
 [module overviews](documentation/Modules/) for setup and details.
 
 Browse following guides for more details.
 
 - Modules
-  - [Core](documentation/Modules/Core.md)
-  - [Material 3](documentation/Modules/Material%203.md)
-  - [Styled](documentation/Modules/Styled.md)
+  - [Core](documentation/Modules/core.md)
+  - [Material 3](documentation/Modules/material3.md)
+  - [Styled](documentation/Modules/styled.md)
 - Guides
-  - [Columns and Sorting](documentation/Guides/Columns%20and%20Sorting.md)
-  - [Filtering and Search](documentation/Guides/Filtering%20and%20Search.md)
-  - [Getting Started](documentation/Guides/Getting%20Started.md)
-  - [Provider-backed Data](documentation/Guides/Provider-backed%20Data.md)
-  - [State, Paging, and Selection](documentation/Guides/State,%20Paging,%20and%20Selection.md)
-  - [UI Providers and Customization](documentation/Guides/UI%20Providers%20and%20Customization.md)
+  - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
+  - [Filtering and Search](documentation/Guides/filtering-and-search.md)
+  - [Getting Started](documentation/Guides/getting-started.md)
+  - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
+  - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
+  - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
 
 # :sparkles: Demo
 

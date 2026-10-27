@@ -8,5 +8,5 @@ snippet: GettingStartedTable
 model's mutation methods or a new model when replacing the data. Before
 rendering `PeopleTable`, configure the UI once with
 `TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
-See the [getting started guide](documentation/Guides/Getting%20Started.md) and
+See the [getting started guide](documentation/Guides/getting-started.md) and
 [module overviews](documentation/Modules/) for setup and details.

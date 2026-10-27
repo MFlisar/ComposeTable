@@ -1,3 +1,5 @@
+# Filtering and Search
+
 ComposeTable keeps filter definitions on columns and active filter values in
 `TableState.query`. Global text search checks each column's `searchText`
 projection; column filters are applied together with search.
@@ -39,4 +41,4 @@ all rows.
 
 For provider-backed tables, the provider—not the UI—must apply all search,
 filter, and sorting semantics to the complete data source. See
-[Provider-backed Data](Provider-backed%20Data.md).
+[Provider-backed Data](provider-backed-data.md).

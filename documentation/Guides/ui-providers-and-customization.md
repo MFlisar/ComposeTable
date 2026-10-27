@@ -1,5 +1,8 @@
+# UI Providers and Customization
+
 ComposeTable Core owns table behavior and geometry; a `TableUI.Provider` supplies
-the controls and visual defaults. `Material3TableUIProvider` is the built-in
+the controls and visual defaults. See the [Core module](../Modules/core.md) for
+the provider contract. `Material3TableUIProvider` is the built-in
 provider. Install it once with `TableUI.set(...)` before rendering a table.
 Because this setting is global, one provider is active for all tables in the
 process.

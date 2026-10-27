@@ -1,3 +1,5 @@
+# Columns and Sorting
+
 Columns describe how an item becomes a table cell. Each column has a stable,
 unique `id`, a display `title`, a value selector, and optional width, sorting,
 search, filtering, and rendering behavior.
@@ -53,5 +55,5 @@ entries determines multi-column sort priority.
 
 For local data, the model applies sorting and filtering to the full list before
 display or paging. A provider must apply the complete `TableQuery` consistently
-across its count and load operations. See [Filtering and Search](Filtering%20and%20Search.md)
-and [Provider-backed Data](Provider-backed%20Data.md).
+across its count and load operations. See [Filtering and Search](filtering-and-search.md)
+and [Provider-backed Data](provider-backed-data.md).

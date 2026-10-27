@@ -6,7 +6,9 @@ applyTo: "documentation/**/*.md,documentation/**/*.partial"
 
 Write developer documentation for ComposeTable, a Kotlin Multiplatform data-table library for Compose. Base every API claim and example on the current code in `library/core` and `library/implementations`; do not reuse component, theme, or registry documentation from other libraries.
 
-Organize pages by the concepts readers need. `Modules/` and `Guides/` are the current examples, not mandatory names or the only possible folders. Module overviews are often useful; add other folders only when they help readers find related material. The generator uses folder and file names verbatim as display names in the generated README, so choose clear, concise names with deliberate capitalization and spaces.
+Every Markdown page in `documentation/` must begin with a descriptive first-level heading (`# Page title`). The heading is the page's human-readable title in generated documentation; filenames are not used as display names. Use simple lowercase filenames, preferably kebab-case, such as `material3.md` or `provider-backed-data.md`.
+
+Organize pages by the concepts readers need. `Modules/` and `Guides/` are examples, not mandatory names or the only possible folders. Module overviews are often useful; add other folders only when they help readers find related material.
 
 Keep the two files in `documentation/_partials/`:
 

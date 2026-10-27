@@ -1,4 +1,7 @@
+# State, Paging, and Selection
+
 `TableState` holds the active query, display mode, page, and selected item keys.
+See [Filtering and Search](filtering-and-search.md) for query state details.
 Create one state per table with `rememberTableState()` and pass it to
 `rememberTable` when you need explicit control or want to preserve the table's
 interaction state.

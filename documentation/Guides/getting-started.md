@@ -1,3 +1,5 @@
+# Getting Started
+
 This guide builds a small table from an in-memory list. Add the `core` artifact
 and a UI provider such as `material3`; the published repository and dependency
 setup are shown in the root README's Setup section.
@@ -60,4 +62,4 @@ screen `Column`, for example, give it `Modifier.weight(1f).fillMaxWidth()`; in
 a full-screen layout, `Modifier.fillMaxSize()` is suitable.
 
 For remote or database-backed data, use the provider-based `rememberTable`
-overload instead. See [Provider-backed Data](Provider-backed%20Data.md).
+overload instead. See [Provider-backed Data](provider-backed-data.md).

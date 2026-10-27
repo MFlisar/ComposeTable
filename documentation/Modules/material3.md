@@ -1,3 +1,5 @@
+# Material 3 Module
+
 The `material3` module provides `Material3TableUIProvider`, a
 `TableUI.Provider` implementation backed by Compose Material 3 components.
 Use it when the application already uses a Material 3 design system.
@@ -19,6 +21,6 @@ chips, menus, dialogs, indicators, dividers, and selection controls used by the
 table UI. It is an optional implementation: applications using another design
 system can provide their own `TableUI.Provider`.
 
-See [Getting Started](../Guides/Getting%20Started.md) for a complete table
-example and [UI Providers and Customization](../Guides/UI%20Providers%20and%20Customization.md)
+See [Getting Started](../Guides/getting-started.md) for a complete table
+example and [UI Providers and Customization](../Guides/ui-providers-and-customization.md)
 for the provider contract.
