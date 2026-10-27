@@ -7,7 +7,8 @@ typed columns, local and provider-backed data, and built-in sorting, filtering,
 paging, and selection, with a pluggable UI provider.
 
 > [!TIP]
-> Try the interactive demo:>
+> Try the interactive demo:
+
 > [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo/)
 
 # :camera: Screenshot
