@@ -77,6 +77,3 @@ documentation:
   folder-partials: _partials
   folder-screenshots: screenshots
   main-screenshot-path: main.png
-  sorted-folder:
-    - Modules
-    - Guides

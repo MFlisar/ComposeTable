@@ -16,7 +16,6 @@ on:
 
 env:
   RELEASE_TAG: ${{ github.event.release.tag_name }} # tag of the published release
-  CONFIG_FILE: ".config.yml"
   JAVA_DISTRIBUTION: "temurin"
 
 permissions:
@@ -42,62 +41,29 @@ jobs:
 
       - name: Read publishing settings from .config.yml
         id: read-config
-        shell: bash
+        uses: ./.github/actions/read-config
+
+      - name: Validate publishing credentials
+        if: ${{ steps.read-config.outputs.github-enabled == 'true' }}
         env:
           TARGET_REPOSITORY_TOKEN: ${{ secrets.TARGET_REPOSITORY_TOKEN }}
+          PUBLISH_ENABLED: ${{ steps.read-config.outputs.publish-enabled }}
+          PUBLISH_TARGET: ${{ steps.read-config.outputs.publish-target }}
+          MAVEN_CENTRAL_ENABLED: ${{ steps.read-config.outputs.maven-central-enabled }}
+          GITHUB_ENABLED: ${{ steps.read-config.outputs.github-enabled }}
+          JAVA_VERSION: ${{ steps.read-config.outputs.java-version }}
         run: |
           set -euo pipefail
-          ruby - <<'RUBY' >> "$GITHUB_OUTPUT"
-          require "yaml"
+          if [[ -z "$TARGET_REPOSITORY_TOKEN" ]]; then
+            echo "::error::TARGET_REPOSITORY_TOKEN is required when GitHub publishing is enabled."
+            exit 1
+          fi
 
-          config = YAML.safe_load_file(ENV.fetch("CONFIG_FILE"))
-          publish_target = config.dig("publish", "target").to_s.strip
-          unless %w[none maven-central github].include?(publish_target)
-            abort "publish.target must be one of: none, maven-central, github."
-          end
-
-          maven_central_enabled = publish_target == "maven-central"
-          github_enabled = publish_target == "github"
-          java_version = config.dig("config", "java-version")
-          github_config = config.dig("publish", "github") || {}
-          target_repository = github_config.fetch("repository", "").to_s.strip
-          if target_repository.empty?
-            target_owner = github_config.fetch("user", "").to_s.strip
-            target_repo = github_config.fetch("repo", "").to_s.strip
-            target_repository = "#{target_owner}/#{target_repo}" unless target_owner.empty? || target_repo.empty?
-          end
-          target_branch = github_config.fetch("branch", "").to_s.strip
-          target_path = github_config.fetch("path", "").to_s.strip
-          publish_enabled = publish_target != "none"
-
-          if publish_enabled && (java_version.nil? || java_version.to_s.strip.empty?)
-            abort "config.java-version must be set when publishing is enabled."
-          end
-
-          if github_enabled
-            abort "TARGET_REPOSITORY_TOKEN is required when GitHub publishing is enabled." if ENV["TARGET_REPOSITORY_TOKEN"].to_s.empty?
-            abort "publish.github.repository or publish.github.user and publish.github.repo must identify owner/repository." unless target_repository.match?(/\A[[:alnum:]_.-]+\/[[:alnum:]_.-]+\z/)
-            abort "publish.github.branch must be set when GitHub publishing is enabled." if target_branch.empty?
-            unless target_path.empty? || (!target_path.include?("\\") && target_path.split("/").all? { |part| !part.empty? && part != "." && part != ".." })
-              abort "publish.github.path must be a relative path without empty, '.' or '..' segments."
-            end
-          end
-
-          puts "publish-enabled=#{publish_enabled}"
-          puts "publish-target=#{publish_target}"
-          puts "maven-central-enabled=#{maven_central_enabled}"
-          puts "github-enabled=#{github_enabled}"
-          puts "java-version=#{java_version}"
-          puts "target-repository=#{target_repository}"
-          puts "target-branch=#{target_branch}"
-          puts "target-path=#{target_path}"
-          RUBY
-
-          echo "Publishing enabled: $(grep '^publish-enabled=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2)"
-          echo "Publish target: $(grep '^publish-target=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2)"
-          echo "Maven Central publishing enabled: $(grep '^maven-central-enabled=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2)"
-          echo "GitHub publishing enabled: $(grep '^github-enabled=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2)"
-          echo "Java version: $(grep '^java-version=' "$GITHUB_OUTPUT" | tail -n 1 | cut -d= -f2)"
+          echo "Publishing enabled: $PUBLISH_ENABLED"
+          echo "Publish target: $PUBLISH_TARGET"
+          echo "Maven Central publishing enabled: $MAVEN_CENTRAL_ENABLED"
+          echo "GitHub publishing enabled: $GITHUB_ENABLED"
+          echo "Java version: $JAVA_VERSION"
 
       - name: Set up Java
         if: ${{ steps.read-config.outputs.publish-enabled == 'true' }}

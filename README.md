@@ -148,15 +148,27 @@ private fun PeopleTable(people: List<Person>) {
 model's mutation methods or a new model when replacing the data. Before
 rendering `PeopleTable`, configure the UI once with
 `TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
-See the [getting started guide](documentation/Guides/getting-started.md) and
-[module overviews](documentation/Modules/) for setup and details.
 
-Browse following guides for more details.
+Browse the documentation for setup and details:
 
+- Guides
+  - [Getting Started](documentation/Guides/getting-started.md)
+  - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
+  - [Filtering and Search](documentation/Guides/filtering-and-search.md)
+  - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
+  - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
+  - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
 - Modules
   - [Core](documentation/Modules/core.md)
   - [Material 3](documentation/Modules/material3.md)
   - [Styled](documentation/Modules/styled.md)
+
+Browse following guides for more details.
+
+- Modules
+  - [ComposeTable Core](documentation/Modules/core.md)
+  - [Material 3 Module](documentation/Modules/material3.md)
+  - [Styled Module](documentation/Modules/styled.md)
 - Guides
   - [Columns and Sorting](documentation/Guides/columns-and-sorting.md)
   - [Filtering and Search](documentation/Guides/filtering-and-search.md)

@@ -1,32 +1,47 @@
 # -----------------------
 # Update GitHub Pages
 # - builds Dokka and optionally the Wasm demo
+# - reads Java, project, and demo settings from .config.yml
 # - demo enabled: landing page, Dokka at /api/, demo at /demo/
 # - demo disabled: Dokka directly at the site root
 # - deploys the artifact to GitHub Pages
 # -----------------------
 
 name: Update GitHub Pages
-run-name: "[${{ github.event_name }}] ${{ github.sha }} - Update GitHub Pages"
+run-name: "[${{ github.event_name }}] Update GitHub Pages"
 
 on:
   push:
     branches: [ main, master ]
 
 env:
-  JAVA_VERSION: "17"                                    # required
   DOKKA_GRADLE_TASK: ":dokka:dokkaGenerate"             # required
   DOKKA_HTML_PATH: "library/dokka/build/dokka/html"     # required
-  DEMO_TASK: ":demo:app:compose:wasmJsBrowserDistribution" # optional; empty disables the demo
-  DEMO_HTML_PATH: "demo/app/compose/build/dist/wasmJs/productionExecutable"
-  PAGE_TITLE: "Compose Styled Components"
 
 permissions:
   contents: read
 
 jobs:
+  read-config:
+    name: Read GitHub Pages settings
+    runs-on: ubuntu-latest
+    outputs:
+      java-version: ${{ steps.read-config.outputs.java-version }}
+      page-title: ${{ steps.read-config.outputs.page-title }}
+      demo-enabled: ${{ steps.read-config.outputs.demo-enabled }}
+      demo-task: ${{ steps.read-config.outputs.demo-task }}
+      demo-html-path: ${{ steps.read-config.outputs.demo-html-path }}
+      demo-apps-json: ${{ steps.read-config.outputs.demo-apps-json }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Read settings from .config.yml
+        id: read-config
+        uses: ./.github/actions/read-config
+
   build-dokka:
     name: Build Dokka
+    needs: read-config
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -36,7 +51,7 @@ jobs:
       - uses: actions/setup-java@v6
         with:
           distribution: temurin
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: ${{ needs.read-config.outputs.java-version }}
 
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
@@ -55,44 +70,42 @@ jobs:
 
   build-demo:
     name: Build Wasm demo
+    needs: read-config
+    if: ${{ needs.read-config.outputs.demo-enabled == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-        if: ${{ env.DEMO_TASK != '' }}
         with:
           fetch-depth: 0
 
       - uses: actions/setup-java@v6
-        if: ${{ env.DEMO_TASK != '' }}
         with:
           distribution: temurin
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: ${{ needs.read-config.outputs.java-version }}
 
       - name: Grant Permission to Execute Gradle
-        if: ${{ env.DEMO_TASK != '' }}
         run: chmod +x gradlew
 
       - uses: gradle/actions/setup-gradle@v6
-        if: ${{ env.DEMO_TASK != '' }}
 
       - name: Build Wasm demo
-        if: ${{ env.DEMO_TASK != '' }}
         env:
           INCLUDE_DEMO_MODULES: "true"
+          DEMO_TASK: ${{ needs.read-config.outputs.demo-task }}
         run: ./gradlew "$DEMO_TASK"
 
       - name: Upload Wasm demo artifact
-        if: ${{ env.DEMO_TASK != '' }}
         uses: actions/upload-artifact@v7
         with:
           name: wasm-demo
-          path: ${{ env.DEMO_HTML_PATH }}
+          path: ${{ needs.read-config.outputs.demo-html-path }}
           if-no-files-found: error
 
   publish-pages:
     name: Publish GitHub Pages
     runs-on: ubuntu-latest
     needs:
+      - read-config
       - build-dokka
       - build-demo
     if: >-
@@ -118,7 +131,7 @@ jobs:
           path: ${{ runner.temp }}/dokka-html
 
       - name: Download Wasm demo artifact
-        if: ${{ env.DEMO_TASK != '' }}
+        if: ${{ needs.read-config.outputs.demo-enabled == 'true' }}
         uses: actions/download-artifact@v8
         with:
           name: wasm-demo
@@ -130,18 +143,20 @@ jobs:
           PAGES_PATH: ${{ runner.temp }}/github-pages
           DOKKA_INPUT_PATH: ${{ runner.temp }}/dokka-html
           DEMO_INPUT_PATH: ${{ runner.temp }}/wasm-demo
+          DEMO_TASK: ${{ needs.read-config.outputs.demo-task }}
+          PAGE_TITLE: ${{ needs.read-config.outputs.page-title }}
+          DEMO_APPS_JSON: ${{ needs.read-config.outputs.demo-apps-json }}
         run: |
           set -euo pipefail
           test -f "$DOKKA_INPUT_PATH/index.html"
           mkdir -p "$PAGES_PATH"
 
           if [[ -n "$DEMO_TASK" ]]; then
-            APP_LINKS="$(ruby -ryaml -rcgi -e '
-              YAML.load_file(".config.yml").fetch("apps", []).each do |app|
-                next unless app["publish-demo"] == true
-
-                name = CGI.escapeHTML(app.fetch("name").to_s)
-                description = CGI.escapeHTML(app.fetch("publish-description", "").to_s)
+            PAGE_TITLE="$(ruby -rcgi -e 'print CGI.escapeHTML(ENV.fetch("PAGE_TITLE"))')"
+            APP_LINKS="$(ruby -rjson -rcgi -e '
+              JSON.parse(ENV.fetch("DEMO_APPS_JSON")).each do |app|
+                name = CGI.escapeHTML(app.fetch("name"))
+                description = CGI.escapeHTML(app.fetch("description"))
                 puts <<~HTML
                   <a class="menu-item" href="./demo/">
                     <span class="icon" aria-hidden="true">
