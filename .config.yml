@@ -44,8 +44,16 @@ apps:
     namespace: com.michaelflisar.composetable.demo
     version-name: 1.0.0
     path: demo/app/compose
-    publish-demo: true
+    publish-app: true
+    publish-path: demo
     publish-description: Explore in the interactive demo
+  - name: Compose Table Demo 2 (same app for testing)
+    namespace: com.michaelflisar.composetable.demo
+    version-name: 1.0.0
+    path: demo/app/compose
+    publish-app: true
+    publish-path: demo2
+    publish-description: Explore in the interactive demo 2
 
 # ---------------------
 # Modules
@@ -54,7 +62,7 @@ apps:
 modules:
   # used to detect latest release version of the library (dynamically on the published homepage)
   primary-artifact-id: core
-  # Modules - list of modules [artifact-id, description, path, (plugin)]
+  # Modules - list of modules [artifact-id, description, path, (plugin), (internal)]
   modules:
     - artifact-id: core
       description: table APIs, state, columns, and data models
@@ -63,7 +71,7 @@ modules:
       description: Material 3 UI provider
       path: library/implementations/material3
     - artifact-id: styled
-      description: core API re-export without a UI provider
+      description: ComposeStyled UI provider
       path: library/implementations/styled
   # XCFrameworks [name, path, targets (ios, macos)]
   xcframeworks: []

@@ -52,9 +52,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.composetable.TableColors
-import com.michaelflisar.composetable.TableIcon
-import com.michaelflisar.composetable.TableTextStyle
-import com.michaelflisar.composetable.TableUI
+import com.michaelflisar.composetable.implementation.TableIcon
+import com.michaelflisar.composetable.implementation.TableTextStyle
+import com.michaelflisar.composetable.implementation.TableUI
 
 /**
  * Install with [TableUI.set] before rendering table components.

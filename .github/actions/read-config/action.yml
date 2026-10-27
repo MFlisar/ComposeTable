@@ -36,14 +36,8 @@ outputs:
   demo-enabled:
     description: Whether a demo is configured for publishing
     value: ${{ steps.parse.outputs.demo-enabled }}
-  demo-task:
-    description: Gradle task for the configured Wasm demo
-    value: ${{ steps.parse.outputs.demo-task }}
-  demo-html-path:
-    description: Generated HTML directory for the configured Wasm demo
-    value: ${{ steps.parse.outputs.demo-html-path }}
   demo-apps-json:
-    description: JSON array of configured published demo app names and descriptions
+    description: JSON array of published demo app metadata, Gradle tasks, and output paths
     value: ${{ steps.parse.outputs.demo-apps-json }}
 runs:
   using: composite

@@ -1,9 +1,9 @@
 package com.michaelflisar.composetable
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composetable.implementation.Text
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse

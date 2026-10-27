@@ -1,8 +1,8 @@
 # -----------------------
 # Update GitHub Pages
-# - builds Dokka and optionally the Wasm demo
+# - builds Dokka and optionally one or more Wasm demos
 # - reads Java, project, and demo settings from .config.yml
-# - demo enabled: landing page, Dokka at /api/, demo at /demo/
+# - demos enabled: landing page, Dokka at /api/, demos at configured paths
 # - demo disabled: Dokka directly at the site root
 # - deploys the artifact to GitHub Pages
 # -----------------------
@@ -29,8 +29,6 @@ jobs:
       java-version: ${{ steps.read-config.outputs.java-version }}
       page-title: ${{ steps.read-config.outputs.page-title }}
       demo-enabled: ${{ steps.read-config.outputs.demo-enabled }}
-      demo-task: ${{ steps.read-config.outputs.demo-task }}
-      demo-html-path: ${{ steps.read-config.outputs.demo-html-path }}
       demo-apps-json: ${{ steps.read-config.outputs.demo-apps-json }}
     steps:
       - uses: actions/checkout@v7
@@ -69,7 +67,7 @@ jobs:
           if-no-files-found: error
 
   build-demo:
-    name: Build Wasm demo
+    name: Build Wasm demos
     needs: read-config
     if: ${{ needs.read-config.outputs.demo-enabled == 'true' }}
     runs-on: ubuntu-latest
@@ -88,17 +86,41 @@ jobs:
 
       - uses: gradle/actions/setup-gradle@v6
 
-      - name: Build Wasm demo
+      - name: Build Wasm demos
         env:
           INCLUDE_DEMO_MODULES: "true"
-          DEMO_TASK: ${{ needs.read-config.outputs.demo-task }}
-        run: ./gradlew "$DEMO_TASK"
+          DEMO_APPS_JSON: ${{ needs.read-config.outputs.demo-apps-json }}
+          DEMO_BUILD_PATH: ${{ runner.temp }}/wasm-demos
+        run: |
+          set -euo pipefail
+          ruby -rjson -e '
+            JSON.parse(ENV.fetch("DEMO_APPS_JSON")).map { |app| app.fetch("task") }.uniq.each do |task|
+              puts task
+            end
+          ' > "$RUNNER_TEMP/demo-tasks"
+          mapfile -t DEMO_TASKS < "$RUNNER_TEMP/demo-tasks"
+          ./gradlew "${DEMO_TASKS[@]}"
+
+          ruby -rjson -rfileutils -e '
+            root = ENV.fetch("DEMO_BUILD_PATH")
+            JSON.parse(ENV.fetch("DEMO_APPS_JSON")).each do |app|
+              source = app.fetch("html-path")
+              abort "Demo output not found: #{source}" unless Dir.exist?(source)
+              abort "Demo index not found: #{source}/index.html" unless File.file?(File.join(source, "index.html"))
+
+              destination = File.join(root, app.fetch("publish-path"))
+              FileUtils.mkdir_p(destination)
+              Dir.children(source).each do |entry|
+                FileUtils.cp_r(File.join(source, entry), destination)
+              end
+            end
+          '
 
       - name: Upload Wasm demo artifact
         uses: actions/upload-artifact@v7
         with:
-          name: wasm-demo
-          path: ${{ needs.read-config.outputs.demo-html-path }}
+          name: wasm-demos
+          path: ${{ runner.temp }}/wasm-demos
           if-no-files-found: error
 
   publish-pages:
@@ -134,16 +156,16 @@ jobs:
         if: ${{ needs.read-config.outputs.demo-enabled == 'true' }}
         uses: actions/download-artifact@v8
         with:
-          name: wasm-demo
-          path: ${{ runner.temp }}/wasm-demo
+          name: wasm-demos
+          path: ${{ runner.temp }}/wasm-demos
 
       - name: Prepare GitHub Pages
         shell: bash
         env:
           PAGES_PATH: ${{ runner.temp }}/github-pages
           DOKKA_INPUT_PATH: ${{ runner.temp }}/dokka-html
-          DEMO_INPUT_PATH: ${{ runner.temp }}/wasm-demo
-          DEMO_TASK: ${{ needs.read-config.outputs.demo-task }}
+          DEMO_INPUT_PATH: ${{ runner.temp }}/wasm-demos
+          DEMO_ENABLED: ${{ needs.read-config.outputs.demo-enabled }}
           PAGE_TITLE: ${{ needs.read-config.outputs.page-title }}
           DEMO_APPS_JSON: ${{ needs.read-config.outputs.demo-apps-json }}
           REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
@@ -152,15 +174,16 @@ jobs:
           test -f "$DOKKA_INPUT_PATH/index.html"
           mkdir -p "$PAGES_PATH"
 
-          if [[ -n "$DEMO_TASK" ]]; then
+          if [[ "$DEMO_ENABLED" == "true" ]]; then
             PAGE_TITLE="$(ruby -rcgi -e 'print CGI.escapeHTML(ENV.fetch("PAGE_TITLE"))')"
             REPOSITORY_URL="$(ruby -rcgi -e 'print CGI.escapeHTML(ENV.fetch("REPOSITORY_URL"))')"
             APP_LINKS="$(ruby -rjson -rcgi -e '
               JSON.parse(ENV.fetch("DEMO_APPS_JSON")).each do |app|
                 name = CGI.escapeHTML(app.fetch("name"))
                 description = CGI.escapeHTML(app.fetch("description"))
+                publish_path = CGI.escapeHTML(app.fetch("publish-path"))
                 puts <<~HTML
-                  <a class="menu-item" href="./demo/">
+                  <a class="menu-item" href="./#{publish_path}/">
                     <span class="icon" aria-hidden="true">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="22" height="22" fill="currentColor">
                         <path d="M480-80q-82 0-155-31.5t-127.5-86Q143-252 111.5-325T80-480q0-83 32.5-156t88-127Q256-817 330-848.5T488-880q80 0 151 27.5t124.5 76q53.5 48.5 85 115T880-518q0 115-70 176.5T640-280h-74q-9 0-12.5 5t-3.5 11q0 12 15 34.5t15 51.5q0 50-27.5 74T480-80Zm0-400Zm-177 23q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120-160q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm200 0q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17Zm120 160q17-17 17-43t-17-43q-17-17-43-17t-43 17q-17 17-17 43t17 43q17 17 43 17t43-17ZM480-160q9 0 14.5-5t5.5-13q0-14-15-33t-15-57q0-42 29-67t71-25h70q66 0 113-38.5T800-518q0-121-92.5-201.5T488-800q-136 0-232 93t-96 227q0 133 93.5 226.5T480-160Z"/>
@@ -179,10 +202,24 @@ jobs:
                 HTML
               end
             ')"
-            test -f "$DEMO_INPUT_PATH/index.html"
-            mkdir -p "$PAGES_PATH/api" "$PAGES_PATH/demo"
+            mkdir -p "$PAGES_PATH/api"
             cp -a "$DOKKA_INPUT_PATH/." "$PAGES_PATH/api/"
-            cp -a "$DEMO_INPUT_PATH/." "$PAGES_PATH/demo/"
+            ruby -rjson -rfileutils -e '
+              root = ENV.fetch("PAGES_PATH")
+              input = ENV.fetch("DEMO_INPUT_PATH")
+              JSON.parse(ENV.fetch("DEMO_APPS_JSON")).each do |app|
+                publish_path = app.fetch("publish-path")
+                source = File.join(input, publish_path)
+                abort "Demo artifact not found: #{source}" unless Dir.exist?(source)
+                abort "Demo index not found: #{source}/index.html" unless File.file?(File.join(source, "index.html"))
+
+                destination = File.join(root, publish_path)
+                FileUtils.mkdir_p(destination)
+                Dir.children(source).each do |entry|
+                  FileUtils.cp_r(File.join(source, entry), destination)
+                end
+              end
+            '
             cat > "$PAGES_PATH/index.html" <<HTML
           <!doctype html>
           <html lang="en">
@@ -256,6 +293,7 @@ jobs:
               }
 
               .subtitle {
+                display: inline-block;
                 margin-top: 20px;
 
                 color: var(--accent);

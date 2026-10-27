@@ -61,30 +61,36 @@ end
 apps = config.fetch("apps", [])
 abort "apps must be a list." unless apps.is_a?(Array)
 abort "Each entry in apps must be a mapping." unless apps.all? { |app| app.is_a?(Hash) }
-demos = apps.select { |app| app["publish-demo"] == true }
-abort "Only one app can have apps.publish-demo enabled." if demos.length > 1
-
-demo_task = ""
-demo_html_path = ""
-demo_apps = []
-unless demos.empty?
-  demo = demos.first
-  demo_path = config_value(demo["path"])
+demos = apps.select { |app| app["publish-app"] == true }
+demo_apps = demos.map do |app|
+  demo_path = config_value(app["path"])
   unless demo_path.match?(/\A[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*\z/) &&
       demo_path.split("/").none? { |part| part == "." || part == ".." }
     abort "apps.path must be a relative path without empty, '.' or '..' segments for a published demo."
   end
 
-  demo_task = ":#{demo_path.split("/").join(":")}:wasmJsBrowserDistribution"
-  demo_html_path = "#{demo_path}/build/dist/wasmJs/productionExecutable"
-  demo_apps = demos.map do |app|
-    {
-      "name" => config_value(app["name"]),
-      "description" => config_value(app["publish-description"])
-    }
+  publish_path = config_value(app["publish-path"])
+  unless publish_path.match?(/\A[A-Za-z0-9._-]+(?:\/[A-Za-z0-9._-]+)*\z/) &&
+      publish_path.split("/").none? { |part| part == "." || part == ".." }
+    abort "apps.publish-path must be a relative path without empty, '.' or '..' segments."
   end
-  abort "apps.name must be set for a published demo." if demo_apps.any? { |app| app["name"].empty? }
+
+  {
+    "name" => config_value(app["name"]),
+    "description" => config_value(app["publish-description"]),
+    "publish-path" => publish_path,
+    "task" => ":#{demo_path.split("/").join(":")}:wasmJsBrowserDistribution",
+    "html-path" => "#{demo_path}/build/dist/wasmJs/productionExecutable"
+  }
 end
+abort "apps.name must be set for each published demo." if demo_apps.any? { |app| app["name"].empty? }
+publish_paths = demo_apps.map { |app| app["publish-path"] }
+abort "apps.publish-path values must be unique." unless publish_paths.uniq.length == publish_paths.length
+abort "apps.publish-path must not overlap the reserved api path." if publish_paths.any? { |path| path == "api" || path.start_with?("api/") }
+overlapping_publish_paths = publish_paths.combination(2).any? do |path, other|
+  path.start_with?("#{other}/") || other.start_with?("#{path}/")
+end
+abort "apps.publish-path values must not overlap." if overlapping_publish_paths
 
 outputs = {
   "publish-enabled" => publish_enabled,
@@ -97,8 +103,6 @@ outputs = {
   "target-path" => target_path,
   "page-title" => page_title,
   "demo-enabled" => !demos.empty?,
-  "demo-task" => demo_task,
-  "demo-html-path" => demo_html_path,
   "demo-apps-json" => JSON.generate(demo_apps)
 }
 

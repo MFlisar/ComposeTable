@@ -26,7 +26,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedFilterChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChipDefaults
@@ -81,7 +80,7 @@ import com.michaelflisar.composetable.TableSelectionCount
 import com.michaelflisar.composetable.TableState
 import com.michaelflisar.composetable.TableTexts
 import com.michaelflisar.composetable.TableToolbar
-import com.michaelflisar.composetable.TableUI
+import com.michaelflisar.composetable.implementation.TableUI
 import com.michaelflisar.composetable.applyTableQuery
 import com.michaelflisar.composetable.booleanColumn
 import com.michaelflisar.composetable.customColumn

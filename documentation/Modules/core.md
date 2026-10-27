@@ -4,6 +4,23 @@ ComposeTable Core provides the table composable, data models, typed columns,
 query and selection state, and the UI-provider contract. It is the base module
 for every ComposeTable table and does not depend on Material 3.
 
+## Why Core and Material 3 are separate
+
+Core is built on Compose Foundation rather than a specific design system. This
+keeps table behavior and layout independent from the visual components used to
+render it, so an application can use the built-in Material 3 provider or supply
+an implementation for another design system.
+
+This separation is also useful for
+[ComposeStyledComponents](https://github.com/MFlisar/ComposeStyledComponents),
+which can render UI in Material 3, Fluent 2, or Cupertino styles. Keeping
+ComposeTable's core UI framework-neutral makes it possible for libraries to
+integrate with those different renderers without taking a Material 3 dependency.
+
+The trade-off is that Core has no default renderer: an application must install
+a `TableUI.Provider` with `TableUI.set(...)` before rendering a table. The
+provider is global, so this is typically done once during application setup.
+
 ## Choose a data source
 
 Create a local model with `rememberTable(initialItems = ...)` for data already

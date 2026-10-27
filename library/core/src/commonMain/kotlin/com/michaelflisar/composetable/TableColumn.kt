@@ -5,6 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composetable.implementation.TableUI
+import com.michaelflisar.composetable.implementation.Text
 
 /** Shared layout defaults used by all column factories. */
 object TableColumnDefaults {

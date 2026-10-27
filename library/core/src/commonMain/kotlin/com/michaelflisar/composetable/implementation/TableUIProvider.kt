@@ -1,4 +1,4 @@
-package com.michaelflisar.composetable
+package com.michaelflisar.composetable.implementation
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import com.michaelflisar.composetable.TableColors
 
 enum class TableIcon {
     Search,
@@ -33,6 +33,11 @@ enum class TableTextStyle {
     LabelSmall,
     TitleMedium,
 }
+
+/**
+ * no defaults here, beacause wasm fails in that case, if interfaces have default implementations.
+ * So we provide defaults in TableUIProviderDefaults.kt
+ */
 
 object TableUI {
 
@@ -69,24 +74,24 @@ object TableUI {
         fun ProvideContentColor(color: Color, content: @Composable () -> Unit)
 
         @Composable
-        fun HorizontalDivider(modifier: Modifier = Modifier, color: Color = Color.Unspecified)
+        fun HorizontalDivider(modifier: Modifier, color: Color)
 
         @Composable
-        fun VerticalDivider(modifier: Modifier = Modifier, color: Color = Color.Unspecified)
+        fun VerticalDivider(modifier: Modifier, color: Color)
 
         @Composable
-        fun CircularProgressIndicator(modifier: Modifier = Modifier)
+        fun CircularProgressIndicator(modifier: Modifier)
 
         @Composable
-        fun LinearProgressIndicator(modifier: Modifier = Modifier)
+        fun LinearProgressIndicator(modifier: Modifier)
 
         @Composable
         fun LazyColumn(
             state: LazyListState,
-            modifier: Modifier = Modifier,
-            paddingForScrollbar: Dp = 0.dp,
-            itemSpacing: Dp = 0.dp,
-            horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+            modifier: Modifier,
+            paddingForScrollbar: Dp,
+            itemSpacing: Dp,
+            horizontalAlignment: Alignment.Horizontal,
             content: LazyListScope.() -> Unit,
         )
 
@@ -100,24 +105,24 @@ object TableUI {
         @Composable
         fun Text(
             text: String,
-            modifier: Modifier = Modifier,
-            color: Color = Color.Unspecified,
-            style: TextStyle? = null,
-            maxLines: Int = Int.MAX_VALUE,
+            modifier: Modifier,
+            color: Color,
+            style: TextStyle?,
+            maxLines: Int,
         )
 
         @Composable
         fun Icon(
             icon: TableIcon,
             contentDescription: String?,
-            modifier: Modifier = Modifier,
-            tint: Color? = null,
+            modifier: Modifier,
+            tint: Color?,
         )
 
         @Composable
         fun TextButton(
             onClick: () -> Unit,
-            enabled: Boolean = true,
+            enabled: Boolean,
             content: @Composable RowScope.() -> Unit,
         )
 
@@ -130,8 +135,8 @@ object TableUI {
         @Composable
         fun IconButton(
             onClick: () -> Unit,
-            modifier: Modifier = Modifier,
-            enabled: Boolean = true,
+            modifier: Modifier,
+            enabled: Boolean,
             content: @Composable () -> Unit,
         )
 
@@ -139,12 +144,12 @@ object TableUI {
         fun OutlinedTextField(
             value: String,
             onValueChange: (String) -> Unit,
-            modifier: Modifier = Modifier,
-            label: (@Composable () -> Unit)? = null,
-            leadingIcon: (@Composable () -> Unit)? = null,
-            singleLine: Boolean = false,
-            isError: Boolean = false,
-            supportingText: (@Composable () -> Unit)? = null,
+            modifier: Modifier,
+            label: (@Composable () -> Unit)?,
+            leadingIcon: (@Composable () -> Unit)?,
+            singleLine: Boolean,
+            isError: Boolean,
+            supportingText: (@Composable () -> Unit)?,
         )
 
         @Composable
@@ -152,7 +157,7 @@ object TableUI {
             selected: Boolean,
             onClick: () -> Unit,
             label: @Composable () -> Unit,
-            trailingIcon: (@Composable () -> Unit)? = null,
+            trailingIcon: (@Composable () -> Unit)?,
         )
 
         @Composable
@@ -166,17 +171,17 @@ object TableUI {
         fun DropdownMenuItem(
             text: @Composable () -> Unit,
             onClick: () -> Unit,
-            leadingIcon: (@Composable () -> Unit)? = null,
-            trailingIcon: (@Composable () -> Unit)? = null,
+            leadingIcon: (@Composable () -> Unit)?,
+            trailingIcon: (@Composable () -> Unit)?,
         )
 
         @Composable
         fun AlertDialog(
             onDismissRequest: () -> Unit,
-            title: (@Composable () -> Unit)? = null,
-            text: (@Composable () -> Unit)? = null,
+            title: (@Composable () -> Unit)?,
+            text: (@Composable () -> Unit)?,
             confirmButton: @Composable () -> Unit,
-            dismissButton: (@Composable () -> Unit)? = null,
+            dismissButton: (@Composable () -> Unit)?,
         )
 
         @Composable

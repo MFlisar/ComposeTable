@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -23,6 +22,11 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
+import com.michaelflisar.composetable.implementation.CircularProgressIndicator
+import com.michaelflisar.composetable.implementation.HorizontalDivider
+import com.michaelflisar.composetable.implementation.LazyColumn
+import com.michaelflisar.composetable.implementation.TableUI
+import com.michaelflisar.composetable.implementation.VerticalDivider
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 sealed interface TableInteraction<Item> {
