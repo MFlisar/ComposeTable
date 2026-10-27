@@ -8,8 +8,8 @@ paging, and selection, with a pluggable UI provider.
 
 > [!TIP]
 > Try the interactive demo:
+
 > [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo/)
-> [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo_2_(same_app_for_testing)-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo2/)
 
 # :camera: Screenshot
 
@@ -28,7 +28,7 @@ paging, and selection, with a pluggable UI provider.
 
 # :computer: Supported Platforms
 
-| Module | android | iOS | windows | macOS | wasm | Notes |
+| Module | android | ios | windows | macos | wasm | Notes |
 |---|---|---|---|---|---|---|
 | core | ✅ | ✅ | ✅ | ✅ | ✅ | table APIs, state, columns, and data models |
 | material3 | ✅ | ✅ | ✅ | ✅ | ✅ | Material 3 UI provider |
@@ -169,10 +169,7 @@ Browse the documentation for setup and details:
 
 # :sparkles: Demo
 
-Following full demo projects are included:
-
-- [Compose Table Demo](demo/app/compose)
-- [Compose Table Demo 2 (same app for testing)](demo/app/compose)
+A full [demo project]([demo/app/web, demo/app/windows, demo/shared]) is included.
 
 # :books: API
 
