@@ -146,6 +146,7 @@ jobs:
           DEMO_TASK: ${{ needs.read-config.outputs.demo-task }}
           PAGE_TITLE: ${{ needs.read-config.outputs.page-title }}
           DEMO_APPS_JSON: ${{ needs.read-config.outputs.demo-apps-json }}
+          REPOSITORY_URL: ${{ github.server_url }}/${{ github.repository }}
         run: |
           set -euo pipefail
           test -f "$DOKKA_INPUT_PATH/index.html"
@@ -153,6 +154,7 @@ jobs:
 
           if [[ -n "$DEMO_TASK" ]]; then
             PAGE_TITLE="$(ruby -rcgi -e 'print CGI.escapeHTML(ENV.fetch("PAGE_TITLE"))')"
+            REPOSITORY_URL="$(ruby -rcgi -e 'print CGI.escapeHTML(ENV.fetch("REPOSITORY_URL"))')"
             APP_LINKS="$(ruby -rjson -rcgi -e '
               JSON.parse(ENV.fetch("DEMO_APPS_JSON")).each do |app|
                 name = CGI.escapeHTML(app.fetch("name"))
@@ -386,7 +388,7 @@ jobs:
 
                 <section>
                   <h1 class="title">${PAGE_TITLE}</h1>
-                  <div class="subtitle">Select a sub page</div>
+                  <a class="subtitle" href="${REPOSITORY_URL}" target="_blank" rel="noopener noreferrer">GitHub repository</a>
                 </section>
 
                 <nav class="menu" aria-label="Project resources">

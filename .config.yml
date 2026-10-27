@@ -45,7 +45,7 @@ apps:
     version-name: 1.0.0
     path: demo/app/compose
     publish-demo: true
-    publish-description: Explore local and provider-backed tables in the interactive demo
+    publish-description: Explore in the interactive demo
 
 # ---------------------
 # Modules
