@@ -1,19 +1,12 @@
-#### Basic usage
+Add the `core` module and a UI provider such as `material3`. Install the provider
+once before rendering tables, define typed columns, create a model, and give
+`Table` a bounded height:
 
-Add the `core` module and the implementation module for the theme you want to use.
-Wrap your UI in `StyledTheme`, then use the shared `Styled*` components. The active
-theme supplies their appearance and behavior.
+snippet: GettingStartedTable
 
-```kotlin
-StyledTheme(
-    platform = platform,
-    theme = rememberMaterial3Theme(),
-) {
-    StyledButton(onClick = { /* Handle the action */ }) {
-        StyledText("Continue")
-    }
-}
-```
-
-Browse the [component guides](documentation/Components/), [module overviews](documentation/Modules/)
-and [advanced guides](documentation/Advanced/) for details.
+`initialItems` is evaluated when the remembered model is created; use the
+model's mutation methods or a new model when replacing the data. Before
+rendering `PeopleTable`, configure the UI once with
+`TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
+See the [getting started guide](documentation/Guides/Getting%20Started.md) and
+[module overviews](documentation/Modules/) for setup and details.

@@ -98,11 +98,43 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
+// begin-snippet: GettingStartedTable
+private data class Person(val id: String, val name: String, val age: Int)
+
+@Composable
+private fun PeopleTable(people: List<Person>) {
+    val columns = remember {
+        listOf<TableColumn<Person, *>>(
+            textColumn(
+                id = "name",
+                title = "Name",
+                value = { it.name },
+                filter = textFilter(),
+            ),
+            numberColumn(
+                id = "age",
+                title = "Age",
+                value = { it.age },
+            ),
+        )
+    }
+    val table = rememberTable(
+        initialItems = { people },
+        columns = columns,
+        itemKey = { it.id },
+    )
+
+    Table(table = table, modifier = Modifier.fillMaxSize())
+}
+// end-snippet
+
 @Composable
 fun DemoContent() {
 
     // once in the app: register implementation
+    // begin-snippet: InstallMaterial3Provider
     TableUI.set(Material3TableUIProvider)
+    // end-snippet
 
     MaterialTheme {
 

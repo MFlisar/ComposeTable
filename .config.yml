@@ -45,13 +45,7 @@ apps:
     version-name: 1.0.0
     path: demo/app/compose
     publish-demo: true
-    publish-description: Open the interactive WASM demo
-  - name: Invalid Demo
-    namespace: com.michaelflisar.composetable.demo
-    version-name: 1.0.0
-    path: demo/app/compose
-    publish-demo: true
-    publish-description: Some description
+    publish-description: Explore local and provider-backed tables in the interactive demo
 
 # ---------------------
 # Modules
@@ -63,13 +57,13 @@ modules:
   # Modules - list of modules [artifact-id, description, path, (plugin)]
   modules:
     - artifact-id: core
-      description: the core module
+      description: table APIs, state, columns, and data models
       path: library/core
     - artifact-id: material3
-      description: a material3 implementation
+      description: Material 3 UI provider
       path: library/implementations/material3
     - artifact-id: styled
-      description: a ComposeStyled implementation
+      description: core API re-export without a UI provider
       path: library/implementations/styled
   # XCFrameworks [name, path, targets (ios, macos)]
   xcframeworks: []
@@ -82,8 +76,7 @@ documentation:
   root-path: documentation
   folder-partials: _partials
   folder-screenshots: screenshots
-  main-screenshot-path:
+  main-screenshot-path: main.png
   sorted-folder:
     - Modules
-    - Compounds
-    - Advanced
+    - Guides
