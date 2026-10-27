@@ -10,7 +10,8 @@ class TableCellContextTest {
         val columns = listOf(numberColumn<Int, Int>("id", "ID", { it }))
         val model = LocalTableModel(listOf(42), columns, TableState()) { it }
         val cell = TableHeaderCell(model, columns[0], 0, TableTexts.German,
-            showFilter = false, filterPresentation = TableFilterPresentation.Popup)
+            showFilter = false, showFilterIcon = false,
+            filterPresentation = TableFilterPresentation.Popup)
         val content = TableHeaderContent(cell)
         assertSame(model, content.table)
         assertSame(model.state, content.state)
@@ -18,6 +19,7 @@ class TableCellContextTest {
         assertSame(TableTexts.German, content.texts)
         assertEquals(0, content.columnIndex)
         assertEquals(false, content.showFilter)
+        assertEquals(false, content.showFilterIcon)
         assertEquals(TableFilterPresentation.Popup, content.filterPresentation)
     }
 

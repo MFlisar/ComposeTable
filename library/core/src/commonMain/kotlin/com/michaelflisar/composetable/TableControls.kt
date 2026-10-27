@@ -284,7 +284,7 @@ fun <Item> TableHeaderContext<Item>.SortIndicator() {
 
 @Composable
 fun <Item> TableHeaderContext<Item>.FilterButton() {
-    if (showFilter && column.filter != null) {
+    if (showFilter && showFilterIcon && column.filter != null) {
         var open by remember { mutableStateOf(false) }
         Box {
             TableUI.provider.IconButton(onClick = { open = true }, modifier = Modifier.size(32.dp)) {

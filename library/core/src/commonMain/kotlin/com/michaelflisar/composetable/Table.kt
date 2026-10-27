@@ -78,6 +78,7 @@ open class TableHeaderContext<Item> internal constructor(
     val columnIndex: Int,
     val texts: TableTexts,
     val showFilter: Boolean = true,
+    val showFilterIcon: Boolean = true,
     val filterPresentation: TableFilterPresentation = TableFilterPresentation.Dialog,
 ) {
     val state: TableState get() = table.state
@@ -91,6 +92,7 @@ class TableHeaderContent<Item> internal constructor(base: TableHeaderContext<Ite
         base.columnIndex,
         base.texts,
         base.showFilter,
+        base.showFilterIcon,
         base.filterPresentation
     ) {
     @Composable
@@ -106,8 +108,17 @@ class TableHeaderCell<Item> internal constructor(
     columnIndex: Int,
     texts: TableTexts,
     showFilter: Boolean = true,
+    showFilterIcon: Boolean = true,
     filterPresentation: TableFilterPresentation = TableFilterPresentation.Dialog,
-) : TableHeaderContext<Item>(table, column, columnIndex, texts, showFilter, filterPresentation) {
+) : TableHeaderContext<Item>(
+    table,
+    column,
+    columnIndex,
+    texts,
+    showFilter,
+    showFilterIcon,
+    filterPresentation
+) {
     @Composable
     fun Content() {
         column.headerContent(TableHeaderContent(this))
@@ -174,6 +185,7 @@ class TableError internal constructor(
  * column correspondence, padding, dividers and exclusive row/cell/selection interactions.
  * Give the table a bounded height (for example fillMaxSize or weight in a Column).
  * [showHeaderFilters] hides header filter entries without clearing active filters.
+ * [showHeaderFilterIcon] hides the filter icon in the default header without disabling menu filters.
  * [errorContent] handles both count failures and individual unloaded row failures.
  */
 @Composable
@@ -187,6 +199,7 @@ fun <Item> Table(
     headerInteraction: TableHeaderInteraction<Item> = TableHeaderInteraction.SortOnClick,
     showColumnHeaders: Boolean = true,
     showHeaderFilters: Boolean = true,
+    showHeaderFilterIcon: Boolean = true,
     headerFilterPresentation: TableFilterPresentation = TableFilterPresentation.Dialog,
     lazyListState: LazyListState = rememberLazyListState(),
     header: (@Composable TableScope<Item>.() -> Unit)? = null,
@@ -237,6 +250,7 @@ fun <Item> Table(
                 index,
                 texts,
                 showHeaderFilters,
+                showHeaderFilterIcon,
                 headerFilterPresentation
             )
             SubcomposeLayout(Modifier.clearAndSetSemantics {}) { _ ->
@@ -290,6 +304,7 @@ fun <Item> Table(
                                     index,
                                     texts,
                                     showHeaderFilters,
+                                    showHeaderFilterIcon,
                                     headerFilterPresentation
                                 )
                                 var showMenu by remember(column.id) { mutableStateOf(false) }

@@ -9,7 +9,7 @@ publish:
     repo: maven-repository
     branch: main
     path: artifacts
-  target: github # [none, maven-central, github]
+  target: maven-central # [none, maven-central, github]
 
 # ---------------------
 # General configuration
@@ -47,6 +47,7 @@ apps:
       - demo/app/web
       - demo/app/windows
       - demo/shared
+    # optional - if set, the app will be published to the homepage and linked in the readme
     publish:
       url-path: demo
       description: Explore the interactive demo

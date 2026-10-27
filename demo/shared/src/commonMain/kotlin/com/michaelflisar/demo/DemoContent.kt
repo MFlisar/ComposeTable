@@ -171,6 +171,7 @@ private fun Table(
     val showTextSearch = remember { mutableStateOf(true) }
     val showToolbarFilters = remember { mutableStateOf(true) }
     val showHeaderFilters = remember { mutableStateOf(true) }
+    val showHeaderFilterIcon = remember { mutableStateOf(true) }
     val toolbarFilterPresentation = remember { mutableStateOf(TableFilterPresentation.Dialog) }
     val headerFilterPresentation = remember { mutableStateOf(TableFilterPresentation.Dialog) }
     val customEmpty = remember { mutableStateOf(false) }
@@ -235,6 +236,7 @@ private fun Table(
                 showTextSearch = showTextSearch,
                 showToolbarFilters = showToolbarFilters,
                 showHeaderFilters = showHeaderFilters,
+                showHeaderFilterIcon = showHeaderFilterIcon,
                 toolbarFilterPresentation = toolbarFilterPresentation,
                 headerFilterPresentation = headerFilterPresentation,
                 customErrors = customErrors,
@@ -267,6 +269,7 @@ private fun Table(
             },
             texts = TableTexts.English,
             showHeaderFilters = showHeaderFilters.value,
+            showHeaderFilterIcon = showHeaderFilterIcon.value,
             headerFilterPresentation = headerFilterPresentation.value,
             emptyContent = {
                 Column {
@@ -377,6 +380,7 @@ private fun SetupRow(
     showTextSearch: MutableState<Boolean>,
     showToolbarFilters: MutableState<Boolean>,
     showHeaderFilters: MutableState<Boolean>,
+    showHeaderFilterIcon: MutableState<Boolean>,
     toolbarFilterPresentation: MutableState<TableFilterPresentation>,
     headerFilterPresentation: MutableState<TableFilterPresentation>,
     customErrors: MutableState<Boolean>,
@@ -593,8 +597,8 @@ private fun SetupRow(
                 CheckableChip("Toolbar filters", showToolbarFilters.value) {
                     showToolbarFilters.value = it
                 }
-                CheckableChip("Header filters", showHeaderFilters.value) {
-                    showHeaderFilters.value = it
+                CheckableChip("Header filter icon", showHeaderFilterIcon.value) {
+                    showHeaderFilterIcon.value = it
                 }
                 CheckableChip("Custom errors", customErrors.value) { customErrors.value = it }
                 CheckableChip("Custom empty", customEmpty.value) { customEmpty.value = it }
