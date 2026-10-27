@@ -7,7 +7,7 @@
 # -----------------------
 
 name: Update GitHub Pages
-run-name: "[${{ github.event_name }}] ${{ github.ref_name }} - Update GitHub Pages"
+run-name: "[${{ github.event_name }}] ${{ github.sha }} - Update GitHub Pages"
 
 on:
   push:

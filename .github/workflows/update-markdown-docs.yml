@@ -5,7 +5,7 @@
 # -----------------------
 
 name: Update Markdown Docs
-run-name: "[${{ github.event_name }}] ${{ github.ref_name }} - Update Markdown Docs"
+run-name: "[${{ github.event_name }}] ${{ github.sha }} - Update Markdown Docs"
 
 on:
   push:
