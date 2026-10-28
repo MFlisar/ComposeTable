@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composetable/material3?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composetable/material3) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
+[![MFlisar/maven-repository](https://img.shields.io/badge/MFlisar-maven--repository-brightgreen?color=blue)](https://MFlisar.github.io/maven-repository) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeTable
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
@@ -29,8 +29,8 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 
 | Module | android | ios | windows | macos | wasm | Notes |
 |---|---|---|---|---|---|---|
-| material3 | ✅ | ✅ | ✅ | ✅ | ✅ | Material 3 Variant |
-| styled | ✅ | ✅ | ✅ | ✅ | ✅ | ComposeStyled Variant |
+| material3 | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses Material3 components |
+| styled | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses ComposeStyled components |
 
 # :arrow_right: Versions
 
@@ -41,6 +41,22 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 | Jetbrains Compose Material3 | `1.9.0` |
 
 # :wrench: Setup
+
+<b>This library is not published on maven central</b>
+
+Instead it's published on GitHub, so you need to add the following repository to your settings.gradle.kts:
+
+```java
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+        // ADD THIS
+        maven("https://MFlisar.github.io/maven-repository/artifacts")
+        // ...
+    }
+}
+```
 
 <details open>
 
@@ -64,9 +80,8 @@ composetable-styled = { module = "io.github.mflisar.composetable:styled", versio
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
-// Choose one implementation:
 implementation(libs.composetable.material3)
-// implementation(libs.composetable.styled)
+implementation(libs.composetable.styled)
 ```
 
 </details>
@@ -82,9 +97,8 @@ Simply add the dependencies inside your **build.gradle.kts** file.
 ```kotlin
 val composetable = "<LATEST-VERSION>"
 
-// Choose one implementation:
 implementation("io.github.mflisar.composetable:material3:${composetable}")
-// implementation("io.github.mflisar.composetable:styled:${composetable}")
+implementation("io.github.mflisar.composetable:styled:${composetable}")
 ```
 
 </details>
@@ -94,7 +108,37 @@ implementation("io.github.mflisar.composetable:material3:${composetable}")
 Add either the `material3` or `styled` implementation dependency, define typed
 columns, create a model, and give `Table` a bounded height:
 
-snippet: GettingStartedTable
+<!-- snippet: GettingStartedTable -->
+```kt
+private data class Person(val id: String, val name: String, val age: Int)
+
+@Composable
+private fun PeopleTable(people: List<Person>) {
+    val columns = remember {
+        listOf<TableColumn<Person, *>>(
+            textColumn(
+                id = "name",
+                title = "Name",
+                value = { it.name },
+                filter = textFilter(),
+            ),
+            numberColumn(
+                id = "age",
+                title = "Age",
+                value = { it.age },
+            ),
+        )
+    }
+    val table = rememberTable(
+        initialItems = { people },
+        columns = columns,
+        itemKey = { it.id },
+    )
+
+    Table(table = table, modifier = Modifier.fillMaxSize())
+}
+```
+<!-- endSnippet -->
 
 `initialItems` is evaluated when the remembered model is created; use the
 model's mutation methods or a new model when replacing the data. When using the
