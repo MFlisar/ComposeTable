@@ -73,6 +73,10 @@ kotlin {
         // dependencies
         // ---------------------
 
+        commonMain {
+            kotlin.srcDir("src/coreOnlyMain/kotlin")
+        }
+
         commonMain.dependencies {
 
             // Compose + AndroidX

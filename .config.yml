@@ -67,10 +67,10 @@ modules:
       path: library/core
       internal: true
     - artifact-id: material3
-      description: A compose table implementation that uses Material3 components
+      description: A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components
       path: library/implementations/material3
     - artifact-id: styled
-      description: A compose table implementation that uses ComposeStyled components
+      description: A compose table implementation that uses [ComposeStyledComponents](https://github.com/MFlisar/ComposeStyledComponents) components
       path: library/implementations/styled
   # XCFrameworks [name, path, targets (ios, macos)]
   xcframeworks: []

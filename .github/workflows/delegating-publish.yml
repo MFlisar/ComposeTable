@@ -1,5 +1,5 @@
 name: Publish
-run-name: "${{ github.event_name }} - ${{ github.ref_name }}"
+run-name: "${{ github.event_name }} - ${{ github.ref_name }} - Publish"
 
 on:
   release:
