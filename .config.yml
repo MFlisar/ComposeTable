@@ -9,7 +9,7 @@ publish:
     repo: maven-repository
     branch: main
     path: artifacts
-  target: maven-central # [none, maven-central, github]
+  target: github # [none, maven-central, github]
 
 # ---------------------
 # General configuration
@@ -63,13 +63,14 @@ modules:
   # Modules - list of modules [artifact-id, description, path, (plugin), (internal)]
   modules:
     - artifact-id: core
-      description: table APIs, state, columns, and data models
+      description: core library that does not provide a UI implementation
       path: library/core
+      internal: true
     - artifact-id: material3
-      description: Material 3 UI provider
+      description: A compose table implementation that uses Material3 components
       path: library/implementations/material3
     - artifact-id: styled
-      description: ComposeStyled UI provider
+      description: A compose table implementation that uses ComposeStyled components
       path: library/implementations/styled
   # XCFrameworks [name, path, targets (ios, macos)]
   xcframeworks: []

@@ -1,21 +1,11 @@
 # Getting Started
 
-This guide builds a small table from an in-memory list. Add the `core` artifact
-and a UI provider such as `material3`; the published repository and dependency
-setup are shown in the root README's Setup section.
-
-## Install the Material 3 provider
-
-Install the provider once before rendering any table:
-
-<!-- snippet: InstallMaterial3Provider -->
-```kt
-TableUI.set(Material3TableUIProvider)
-```
-<!-- endSnippet -->
-
-The provider is global, so do not switch providers per screen. Compose the table
-under `MaterialTheme`.
+This guide builds a small table from an in-memory list. Add the `material3` or
+`styled` implementation artifact; the published repository and dependency
+setup are shown in the root README's Setup section. The selected artifact
+provides its table implementation automatically. When using Material 3, render
+the table under `MaterialTheme`; when using Styled, configure the desired
+ComposeStyledComponents renderer.
 
 ## Define columns and render the table
 

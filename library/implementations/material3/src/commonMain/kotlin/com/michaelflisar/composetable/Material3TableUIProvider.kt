@@ -1,4 +1,4 @@
-package com.michaelflisar.composetable.material3
+package com.michaelflisar.composetable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ColumnScope
@@ -51,17 +51,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composetable.TableColors
 import com.michaelflisar.composetable.implementation.TableIcon
 import com.michaelflisar.composetable.implementation.TableTextStyle
 import com.michaelflisar.composetable.implementation.TableUI
 
-/**
- * Install with [TableUI.set] before rendering table components.
- *
- *
- * */
-object Material3TableUIProvider : TableUI.Provider {
+internal object Material3TableUIProvider : TableUI.Provider {
 
     @Composable
     override fun tableColors() = TableColors(

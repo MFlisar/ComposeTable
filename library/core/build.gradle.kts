@@ -15,7 +15,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
     alias(libs.plugins.dokka)
-    alias(libs.plugins.vanniktech.maven.publish.base)
+    //alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
     alias(mflisar.plugins.kmpdevtools.buildplugin)
@@ -94,4 +94,5 @@ kotlin {
 // Publish
 // -------------------
 
-BuildFileUtil.setupMavenPublish(module)
+// not published!
+// BuildFileUtil.setupMavenPublish(module)

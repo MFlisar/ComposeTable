@@ -1,10 +1,10 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composetable/core?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composetable/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composetable/material3?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composetable/material3) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeTable
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
 ComposeTable is a Kotlin Multiplatform data-table library for Compose. It provides
 typed columns, local and provider-backed data, and built-in sorting, filtering,
-paging, and selection, with a pluggable UI provider.
+paging, and selection, with Material 3 and ComposeStyled UI variants.
 
 > [!TIP]
 > Try the interactive demo:
@@ -29,9 +29,8 @@ paging, and selection, with a pluggable UI provider.
 
 | Module | android | ios | windows | macos | wasm | Notes |
 |---|---|---|---|---|---|---|
-| core | ✅ | ✅ | ✅ | ✅ | ✅ | table APIs, state, columns, and data models |
-| material3 | ✅ | ✅ | ✅ | ✅ | ✅ | Material 3 UI provider |
-| styled | ✅ | ✅ | ✅ | ✅ | ✅ | ComposeStyled UI provider |
+| material3 | ✅ | ✅ | ✅ | ✅ | ✅ | Material 3 Variant |
+| styled | ✅ | ✅ | ✅ | ✅ | ✅ | ComposeStyled Variant |
 
 # :arrow_right: Versions
 
@@ -58,7 +57,6 @@ composetable = "<LATEST-VERSION>"
 
 [libraries]
 
-composetable-core = { module = "io.github.mflisar.composetable:core", version.ref = "composetable" }
 composetable-material3 = { module = "io.github.mflisar.composetable:material3", version.ref = "composetable" }
 composetable-styled = { module = "io.github.mflisar.composetable:styled", version.ref = "composetable" }
 ```
@@ -66,9 +64,9 @@ composetable-styled = { module = "io.github.mflisar.composetable:styled", versio
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
-implementation(libs.composetable.core)
+// Choose one implementation:
 implementation(libs.composetable.material3)
-implementation(libs.composetable.styled)
+// implementation(libs.composetable.styled)
 ```
 
 </details>
@@ -84,62 +82,30 @@ Simply add the dependencies inside your **build.gradle.kts** file.
 ```kotlin
 val composetable = "<LATEST-VERSION>"
 
-implementation("io.github.mflisar.composetable:core:${composetable}")
+// Choose one implementation:
 implementation("io.github.mflisar.composetable:material3:${composetable}")
-implementation("io.github.mflisar.composetable:styled:${composetable}")
+// implementation("io.github.mflisar.composetable:styled:${composetable}")
 ```
 
 </details>
 
 # :rocket: Usage
 
-Add the `core` module and a UI provider such as `material3`. Install the provider
-once before rendering tables, define typed columns, create a model, and give
-`Table` a bounded height:
+Add either the `material3` or `styled` implementation dependency, define typed
+columns, create a model, and give `Table` a bounded height:
 
-<!-- snippet: GettingStartedTable -->
-```kt
-private data class Person(val id: String, val name: String, val age: Int)
-
-@Composable
-private fun PeopleTable(people: List<Person>) {
-    val columns = remember {
-        listOf<TableColumn<Person, *>>(
-            textColumn(
-                id = "name",
-                title = "Name",
-                value = { it.name },
-                filter = textFilter(),
-            ),
-            numberColumn(
-                id = "age",
-                title = "Age",
-                value = { it.age },
-            ),
-        )
-    }
-    val table = rememberTable(
-        initialItems = { people },
-        columns = columns,
-        itemKey = { it.id },
-    )
-
-    Table(table = table, modifier = Modifier.fillMaxSize())
-}
-```
-<!-- endSnippet -->
+snippet: GettingStartedTable
 
 `initialItems` is evaluated when the remembered model is created; use the
-model's mutation methods or a new model when replacing the data. Before
-rendering `PeopleTable`, configure the UI once with
-`TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
+model's mutation methods or a new model when replacing the data. When using the
+`material3` variant, compose the table under `MaterialTheme`. With the `styled`
+variant, configure the desired ComposeStyledComponents renderer.
 
 Browse the documentation for setup and details:
 
 - General
   - [Getting Started](documentation/Guides/getting-started.md)
 - Modules
-  - [Core](documentation/Modules/core.md)
   - [Material 3](documentation/Modules/material3.md)
   - [Styled](documentation/Modules/styled.md)
 - Advanced
@@ -147,7 +113,7 @@ Browse the documentation for setup and details:
   - [Filtering and Search](documentation/Guides/filtering-and-search.md)
   - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
   - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
-  - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
+  - [Table Customization](documentation/Guides/table-customization.md)
 
 # :sparkles: Demo
 

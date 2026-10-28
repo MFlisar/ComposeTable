@@ -1,22 +1,14 @@
-# UI Providers and Customization
+# Table Customization
 
-ComposeTable Core owns table behavior and geometry; a `TableUI.Provider` supplies
-the controls and visual defaults. Core uses Compose Foundation instead of
-depending on Material 3 so that applications and libraries can render tables
-with different design systems, including those supported by
-[ComposeStyledComponents](https://github.com/MFlisar/ComposeStyledComponents).
-See the [Core module](../Modules/core.md) for more about this separation.
-
-`Material3TableUIProvider` is the built-in provider. Install it, or another
-implementation, with `TableUI.set(...)` before rendering a table. Core has no
-default renderer, so this setup is required; because the setting is global, one
-provider is active for all tables in the process.
+ComposeTable provides table-level options for customizing appearance, content,
+and interactions. Choose either the [Material 3](../Modules/material3.md) or
+[Styled](../Modules/styled.md) implementation to select the visual style.
 
 ## Customize a table
 
 `Table` accepts `shape` and `TableColors` as parameters. Use `TableDefaults`
-for the active provider's default shape and colors, or pass explicit colors for
-the container, content, header, selected rows, and dividers.
+for the selected implementation's default shape and colors, or pass explicit
+colors for the container, content, header, selected rows, and dividers.
 
 The `header`, `footer`, `emptyContent`, and `errorContent` slots replace or
 extend the corresponding table areas. The default footer includes item count,
@@ -49,12 +41,4 @@ rows and fills the remaining height between its header and footer.
 Pass `TableTexts.English`, `TableTexts.German`, or a customized `TableTexts`
 to `Table`. This localizes built-in controls and accessibility descriptions;
 column titles and choice-option labels remain part of the column definitions.
-Override `errorMessage` to control how provider exceptions are displayed.
-
-## Implement another UI provider
-
-Implement `TableUI.Provider` to map the table UI primitives to another Compose
-design system. The provider supplies colors, shape, typography, controls,
-dividers, progress indicators, and the lazy-column host. Install the
-implementation with `TableUI.set(...)` before composing `Table`; Core does not
-provide a fallback renderer.
+Override `errorMessage` to control how table errors are displayed.

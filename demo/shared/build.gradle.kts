@@ -101,6 +101,7 @@ kotlin {
             api(libs.jetbrains.compose.material.icons.extended)
 
             // modules
+            //api(project(":composetable:core"))
             //api(project(":composetable:implementations:styled"))
             api(project(":composetable:implementations:material3"))
 

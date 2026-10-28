@@ -1,20 +1,18 @@
-Add the `core` module and a UI provider such as `material3`. Install the provider
-once before rendering tables, define typed columns, create a model, and give
-`Table` a bounded height:
+Add either the `material3` or `styled` implementation dependency, define typed
+columns, create a model, and give `Table` a bounded height:
 
 snippet: GettingStartedTable
 
 `initialItems` is evaluated when the remembered model is created; use the
-model's mutation methods or a new model when replacing the data. Before
-rendering `PeopleTable`, configure the UI once with
-`TableUI.set(Material3TableUIProvider)` and compose it under `MaterialTheme`.
+model's mutation methods or a new model when replacing the data. When using the
+`material3` variant, compose the table under `MaterialTheme`. With the `styled`
+variant, configure the desired ComposeStyledComponents renderer.
 
 Browse the documentation for setup and details:
 
 - General
   - [Getting Started](documentation/Guides/getting-started.md)
 - Modules
-  - [Core](documentation/Modules/core.md)
   - [Material 3](documentation/Modules/material3.md)
   - [Styled](documentation/Modules/styled.md)
 - Advanced
@@ -22,4 +20,4 @@ Browse the documentation for setup and details:
   - [Filtering and Search](documentation/Guides/filtering-and-search.md)
   - [Provider-backed Data](documentation/Guides/provider-backed-data.md)
   - [State, Paging, and Selection](documentation/Guides/state-paging-and-selection.md)
-  - [UI Providers and Customization](documentation/Guides/ui-providers-and-customization.md)
+  - [Table Customization](documentation/Guides/table-customization.md)

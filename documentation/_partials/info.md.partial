@@ -1,3 +1,3 @@
 ComposeTable is a Kotlin Multiplatform data-table library for Compose. It provides
 typed columns, local and provider-backed data, and built-in sorting, filtering,
-paging, and selection, with a pluggable UI provider.
+paging, and selection, with Material 3 and ComposeStyled UI variants.

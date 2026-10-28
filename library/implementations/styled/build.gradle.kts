@@ -72,9 +72,28 @@ kotlin {
         // dependencies
         // ---------------------
 
-        commonMain.dependencies {
+        val coreSources = project.objects.sourceDirectorySet(
+            "coreCommonMain",
+            "Core common Kotlin sources"
+        ).apply {
+            srcDir(project(":composetable:core").file("src/commonMain/kotlin"))
+            exclude("com/michaelflisar/composetable/implementation/TableUIProvider.kt")
+        }
 
-            api(project(":composetable:core"))
+        commonMain {
+
+            kotlin.source(coreSources)
+
+            dependencies {
+
+                // copy from core
+                api(libs.jetbrains.compose.components.resources)
+                api(libs.jetbrains.compose.foundation)
+                api(libs.jetbrains.kotlinx.coroutines.core)
+
+                // implementation specific
+                // TODO
+            }
 
         }
     }

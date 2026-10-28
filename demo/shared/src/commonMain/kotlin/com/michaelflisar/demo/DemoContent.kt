@@ -80,12 +80,10 @@ import com.michaelflisar.composetable.TableSelectionCount
 import com.michaelflisar.composetable.TableState
 import com.michaelflisar.composetable.TableTexts
 import com.michaelflisar.composetable.TableToolbar
-import com.michaelflisar.composetable.implementation.TableUI
 import com.michaelflisar.composetable.applyTableQuery
 import com.michaelflisar.composetable.booleanColumn
 import com.michaelflisar.composetable.customColumn
 import com.michaelflisar.composetable.enumColumn
-import com.michaelflisar.composetable.material3.Material3TableUIProvider
 import com.michaelflisar.composetable.numberColumn
 import com.michaelflisar.composetable.numberFilter
 import com.michaelflisar.composetable.rememberTable
@@ -129,11 +127,6 @@ private fun PeopleTable(people: List<Person>) {
 
 @Composable
 fun DemoContent() {
-
-    // once in the app: register implementation
-    // begin-snippet: InstallMaterial3Provider
-    TableUI.set(Material3TableUIProvider)
-    // end-snippet
 
     MaterialTheme {
 
