@@ -30,7 +30,7 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 | Module | android | ios | windows | macos | wasm | Notes |
 |---|---|---|---|---|---|---|
 | material3 | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components |
-| styled | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses [ComposeStyledComponents](https://github.com/MFlisar/ComposeStyledComponents) components |
+| styled | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses [ComposeStyled](https://github.com/MFlisar/ComposeStyled) components |
 
 # :arrow_right: Versions
 
