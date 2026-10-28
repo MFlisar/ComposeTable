@@ -8,7 +8,7 @@ paging, and selection, with a pluggable UI provider.
 
 > [!TIP]
 > Try the interactive demo:
-
+> 
 > [![Open Interactive Demo](https://img.shields.io/badge/Compose_Table_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/ComposeTable/demo/)
 
 # :camera: Screenshot
@@ -151,7 +151,7 @@ Browse the documentation for setup and details:
 
 # :sparkles: Demo
 
-A [demo project]([demo/app/web, demo/app/windows, demo/shared]) is included.
+A [demo project](demo) is included.
 
 # :books: API
 
