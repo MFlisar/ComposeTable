@@ -5,7 +5,7 @@ This guide builds a small table from an in-memory list. Add the `material3` or
 setup are shown in the root README's Setup section. The selected artifact
 provides its table implementation automatically. When using Material 3, render
 the table under `MaterialTheme`; when using Styled, configure the desired
-ComposeStyledComponents renderer.
+ComposeStyled renderer.
 
 ## Define columns and render the table
 

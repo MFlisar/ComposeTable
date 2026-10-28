@@ -1,5 +1,5 @@
 name: Publish
-run-name: "${{ github.event_name }} - ${{ github.ref_name }} - Publish"
+run-name: "[${{ github.event_name }}] ${{ github.ref_name }} - Publish"
 
 on:
   release:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   publish:
-    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-publish.yml@9.0.5
+    uses: MFlisar/kmp-devtools/.github/workflows/reuseable-publish.yml@9.1.0
     with:
       config-file: .config.yml
     secrets: inherit

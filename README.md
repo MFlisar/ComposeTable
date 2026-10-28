@@ -143,7 +143,7 @@ private fun PeopleTable(people: List<Person>) {
 `initialItems` is evaluated when the remembered model is created; use the
 model's mutation methods or a new model when replacing the data. When using the
 `material3` variant, compose the table under `MaterialTheme`. With the `styled`
-variant, configure the desired ComposeStyledComponents renderer.
+variant, configure the desired ComposeStyled renderer.
 
 Browse the documentation for setup and details:
 

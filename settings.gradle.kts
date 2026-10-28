@@ -48,7 +48,7 @@ plugins {
     // - change version in gradle/mflisar.versions.toml,
     // - the plugin will automatically update this and other files (settings.gradle.kts, GitHub workflows, etc.)
     //   then stops and asks you to rerun the build
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.0.5"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.1.0"
 }
 
 // --------------
