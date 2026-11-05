@@ -70,13 +70,15 @@ kotlin {
         // ---------------------
 
         commonMain {
-
             kotlin.srcDir(project(":composetable:core").file("src/commonMain/kotlin"))
+            kotlin.srcDir(project(":composetable:ui-provider:material3").file("src/commonMain/kotlin"))
 
             dependencies {
-                api(project(":composetable:ui-provider:material3")) {
-                    exclude(group = "io.github.mflisar.composetable", module = "core")
-                }
+                api(libs.jetbrains.compose.components.resources)
+                api(libs.jetbrains.compose.foundation)
+                api(libs.jetbrains.kotlinx.coroutines.core)
+                implementation(libs.jetbrains.compose.material3)
+                implementation(libs.jetbrains.compose.material.icons.extended)
             }
         }
     }
