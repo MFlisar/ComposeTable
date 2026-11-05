@@ -1,14 +1,9 @@
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.BuildFileUtil
-import com.michaelflisar.kmpdevtools.core.Platform
+import com.michaelflisar.kmpdevtools.core.Target
 import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.isDebug
 import com.michaelflisar.kmpdevtools.isExe
 import com.michaelflisar.kmpdevtools.setupBuildKonfig
-import com.michaelflisar.kmpdevtools.setupDependencies
-import com.michaelflisar.kmpdevtools.setupBuildKonfig
-import com.michaelflisar.kmpdevtools.isDebug
-import com.michaelflisar.kmpdevtools.isExe
 
 plugins {
     // kmp + app/library
@@ -33,7 +28,7 @@ plugins {
 
 val module = LibraryModuleConfig.read(project)
 
-val buildTargets = Targets(Platform.ANDROID, Platform.IOS, Platform.WINDOWS, Platform.MACOS, Platform.WASM)
+val buildTargets = Targets(Target.ANDROID, Target.IOS, Target.JVM, Target.MACOS, Target.WASM)
 
 val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,
@@ -96,14 +91,14 @@ kotlin {
             // compose
             api(libs.jetbrains.compose.components.resources)
             api(libs.jetbrains.compose.runtime)
+
+            // material3
             api(libs.jetbrains.compose.material3)
             api(libs.jetbrains.compose.material.icons.core)
             api(libs.jetbrains.compose.material.icons.extended)
 
             // modules
-            //api(project(":composetable:core"))
-            //api(project(":composetable:implementations:styled"))
-            api(project(":composetable:implementations:material3"))
+            api(project(":composetable:implementation:material3"))
 
         }
 

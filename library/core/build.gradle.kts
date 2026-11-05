@@ -2,8 +2,7 @@ import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.configs.AndroidLibraryConfig
 import com.michaelflisar.kmpdevtools.configs.LibraryModuleConfig
-import com.michaelflisar.kmpdevtools.setupDependencies
-import com.michaelflisar.kmpdevtools.core.Platform
+import com.michaelflisar.kmpdevtools.core.Target
 
 plugins {
     // kmp + app/library
@@ -15,7 +14,7 @@ plugins {
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
     alias(libs.plugins.dokka)
-    //alias(libs.plugins.vanniktech.maven.publish.base)
+    alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
     alias(mflisar.plugins.kmpdevtools.buildplugin)
@@ -29,7 +28,7 @@ plugins {
 
 val module = LibraryModuleConfig.read(project)
 
-val buildTargets = Targets(Platform.ANDROID, Platform.IOS, Platform.WINDOWS, Platform.MACOS, Platform.WASM)
+val buildTargets = Targets(Target.ANDROID, Target.IOS, Target.JVM, Target.MACOS, Target.WASM)
 
 val androidConfig = AndroidLibraryConfig.create(
     libraryModuleConfig = module,
@@ -75,15 +74,13 @@ kotlin {
 
         commonMain {
             kotlin.srcDir("src/coreOnlyMain/kotlin")
-        }
 
-        commonMain.dependencies {
-
-            // Compose + AndroidX
-            api(libs.jetbrains.compose.components.resources)
-            api(libs.jetbrains.compose.foundation)
-            api(libs.jetbrains.kotlinx.coroutines.core)
-
+            dependencies {
+                // Compose + AndroidX
+                api(libs.jetbrains.compose.components.resources)
+                api(libs.jetbrains.compose.foundation)
+                api(libs.jetbrains.kotlinx.coroutines.core)
+            }
         }
 
         commonTest.dependencies {
@@ -98,5 +95,4 @@ kotlin {
 // Publish
 // -------------------
 
-// not published!
-// BuildFileUtil.setupMavenPublish(module)
+BuildFileUtil.setupMavenPublish(module)

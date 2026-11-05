@@ -15,9 +15,11 @@ composethemer =   			"2.0.0"
 composecolors =             "2.0.0"
 toolbox =                   "4.0.2"
 
+composestyled =             "0.0.1-alpha09"
+
 # plugins only
 kmpicon =                   "1.0.0"
-kmpdevtools =               "9.1.0"
+kmpdevtools =               "9.3.0"
 
 # demos
 democomposables =           "1.0.5"
@@ -106,6 +108,22 @@ toolbox-table =                                 { module = "io.github.mflisar.to
 toolbox-ui =                                    { module = "io.github.mflisar.toolbox:ui",                                          version.ref = "toolbox" }
 toolbox-ui-adaptive =                           { module = "io.github.mflisar.toolbox:ui-adaptive",                                 version.ref = "toolbox" }
 toolbox-zip =                                   { module = "io.github.mflisar.toolbox:zip",                                         version.ref = "toolbox" }
+
+# styled
+composestyled-core = { module = "io.github.mflisar.composestyled:core", version.ref = "composestyled" }
+composestyled-foundation = { module = "io.github.mflisar.composestyled:foundation", version.ref = "composestyled" }
+composestyled-cupertino-flat = { module = "io.github.mflisar.composestyled:cupertino-flat", version.ref = "composestyled" }
+composestyled-cupertino-liquid = { module = "io.github.mflisar.composestyled:cupertino-liquid", version.ref = "composestyled" }
+composestyled-fluent2 = { module = "io.github.mflisar.composestyled:fluent2", version.ref = "composestyled" }
+composestyled-material3 = { module = "io.github.mflisar.composestyled:material3", version.ref = "composestyled" }
+composestyled-iconset-material3 = { module = "io.github.mflisar.composestyled:iconset-material3", version.ref = "composestyled" }
+composestyled-iconset-fluent2 = { module = "io.github.mflisar.composestyled:iconset-fluent2", version.ref = "composestyled" }
+composestyled-iconset-sfsymbols = { module = "io.github.mflisar.composestyled:iconset-sfsymbols", version.ref = "composestyled" }
+composestyled-theme-cupertino = { module = "io.github.mflisar.composestyled:theme-cupertino", version.ref = "composestyled" }
+composestyled-theme-fluent2 = { module = "io.github.mflisar.composestyled:theme-fluent2", version.ref = "composestyled" }
+composestyled-theme-material3 = { module = "io.github.mflisar.composestyled:theme-material3", version.ref = "composestyled" }
+composestyled-theme-pastel = { module = "io.github.mflisar.composestyled:theme-pastel", version.ref = "composestyled" }
+composestyled-theme-nature = { module = "io.github.mflisar.composestyled:theme-nature", version.ref = "composestyled" }
 
 # demos
 democomposables =                               { module = "io.github.mflisar.democomposables:library",                             version.ref = "democomposables" }

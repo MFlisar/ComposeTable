@@ -192,6 +192,15 @@ object TableUI {
         fun RadioButton(selected: Boolean, onClick: (() -> Unit)?)
     }
 
-    internal var provider: Provider = TableUIProvider.impl
+    private var instance: Provider? = TableDefaultUIProvider.impl
+
+    internal val provider: Provider
+        get() = instance ?: throw NotImplementedError(
+            "No UI provider is registered. Add an implementation module or call TableUI.set(...) before using tables."
+        )
+
+    fun set(provider: Provider) {
+        this.instance = provider
+    }
 
 }

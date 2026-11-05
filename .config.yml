@@ -9,7 +9,8 @@ publish:
     repo: maven-repository
     branch: main
     path: artifacts
-  target: github # [none, maven-central, github]
+  release-target: maven-central
+  test-target: github
 
 # ---------------------
 # General configuration
@@ -44,14 +45,14 @@ apps:
     namespace: com.michaelflisar.composetable.demo
     version-name: 1.0.0
     module-paths:
-      - demo/app/web
-      - demo/app/windows
+      - demo/app/jvm
+      - demo/app/wasm
       - demo/shared
     # optional - if set, the app will be published to the homepage and linked in the readme
     publish:
       url-path: demo
       description: Explore the interactive demo
-      module-path: demo/app/web
+      module-path: demo/app/wasm
 
 # ---------------------
 # Modules
@@ -66,12 +67,20 @@ modules:
       description: core library that does not provide a UI implementation
       path: library/core
       internal: true
+    - artifact-id: material3-ui-provider
+      description: Material 3 UI provider for manual registration
+      path: library/ui-provider/material3
+      internal: true
+    - artifact-id: styled-ui-provider
+      description: Styled UI provider for manual registration
+      path: library/ui-provider/styled
+      internal: true
     - artifact-id: material3
       description: A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components
-      path: library/implementations/material3
+      path: library/implementation/material3
     - artifact-id: styled
       description: A compose table implementation that uses [ComposeStyled](https://github.com/MFlisar/ComposeStyled) components
-      path: library/implementations/styled
+      path: library/implementation/styled
   # XCFrameworks [name, path, targets (ios, macos)]
   xcframeworks: []
 

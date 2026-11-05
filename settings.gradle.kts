@@ -4,15 +4,24 @@ import com.michaelflisar.kmpdevtools.core.Config
 dependencyResolutionManagement    {
 
     repositories {
+
+        // main
         mavenCentral()
         google()
         gradlePluginPortal()
-        maven("https://jitpack.io")
+
+        // mine
+        maven("https://raw.githubusercontent.com/MFlisar/maven-repository/refs/heads/main/artifacts")
+        // local
+        mavenLocal()
+
+        // jetbrains
         maven("https://oss.sonatype.org/content/repositories/snapshots")
         // jewel + skiko
         maven("https://www.jetbrains.com/intellij-repository/releases")
         maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies/")
-        mavenLocal()
+        // jitpack
+        maven("https://jitpack.io")
     }
 
     versionCatalogs {
@@ -45,27 +54,24 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    // - change version in gradle/mflisar.versions.toml,
-    // - the plugin will automatically update this and other files (settings.gradle.kts, GitHub workflows, etc.)
-    //   then stops and asks you to rerun the build
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.1.0"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "9.3.0"
 }
 
 // --------------
 // Library
 // --------------
 
-val config = Config.read(rootDir)
-val libraryName = config.libraryName()
+val libraryConfig = Config.read(rootDir)
+val libraryName = libraryConfig.libraryName()
 
 // Library Modules
-SettingsFileUtil.includeModules(settings, libraryName, config)
+SettingsFileUtil.includeModules(settings, libraryName, libraryConfig)
 SettingsFileUtil.includeDokkaModule(settings)
 
 // --------------
 // App
 // --------------
 
-if (System.getenv("CI") != "true" || System.getenv("INCLUDE_DEMO_MODULES") == "true") {
+if (System.getenv("CI") != "true") {
     SettingsFileUtil.includeModulesInFolder(settings, "demo")
 }
