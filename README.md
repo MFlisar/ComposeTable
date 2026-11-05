@@ -1,6 +1,6 @@
-[![MFlisar/maven-repository](https://img.shields.io/badge/MFlisar-maven--repository-brightgreen?color=blue)](https://MFlisar.github.io/maven-repository) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.composetable/core?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.composetable/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/ComposeTable.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # ComposeTable
-![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge)
 
 ComposeTable is a Kotlin Multiplatform data-table library for Compose. It provides
 typed columns, local and provider-backed data, and built-in sorting, filtering,
@@ -27,10 +27,10 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 
 # :computer: Supported Platforms
 
-| Module | android | ios | windows | macos | wasm | Notes |
-|---|---|---|---|---|---|---|
-| material3 | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components |
-| styled | ✅ | ✅ | ✅ | ✅ | ✅ | A compose table implementation that uses [ComposeStyled](https://github.com/MFlisar/ComposeStyled) components |
+| Module | Notes |
+|---|---|
+| material3 | A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components |
+| styled | A compose table implementation that uses [ComposeStyled](https://github.com/MFlisar/ComposeStyled) components |
 
 # :arrow_right: Versions
 
@@ -41,22 +41,6 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 | Jetbrains Compose Material3 | `1.9.0` |
 
 # :wrench: Setup
-
-<b>This library is not published on maven central</b>
-
-Instead it's published on GitHub, so you need to add the following repository to your settings.gradle.kts:
-
-```java
-dependencyResolutionManagement {
-    repositories {
-        mavenCentral()
-        google()
-        // ADD THIS
-        maven("https://MFlisar.github.io/maven-repository/artifacts")
-        // ...
-    }
-}
-```
 
 <details open>
 
