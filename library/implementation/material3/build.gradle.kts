@@ -71,7 +71,6 @@ kotlin {
 
         commonMain {
             kotlin.srcDir(project(":composetable:core").file("src/commonMain/kotlin"))
-            kotlin.srcDir(project(":composetable:ui-provider:material3").file("src/commonMain/kotlin"))
 
             dependencies {
                 api(libs.jetbrains.compose.components.resources)

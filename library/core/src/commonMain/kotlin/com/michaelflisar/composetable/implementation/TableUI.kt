@@ -181,8 +181,12 @@ object TableUI {
             onDismissRequest: () -> Unit,
             title: (@Composable () -> Unit)?,
             text: (@Composable () -> Unit)?,
-            confirmButton: @Composable () -> Unit,
-            dismissButton: (@Composable () -> Unit)?,
+            confirmText: String,
+            onConfirmClick: () -> Unit,
+            confirmEnabled: Boolean,
+            dismissText: String?,
+            onDismissClick: (() -> Unit)?,
+            dismissEnabled: Boolean,
         )
 
         @Composable

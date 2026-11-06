@@ -388,25 +388,18 @@ internal fun <Item> TableHeaderContext<Item>.FilterEditor(
             FilterFields(capability, draft.value, draft.valid, ::change)
         }
     }
-    val clear: @Composable () -> Unit = {
-        TableUI.provider.TextButton(onClick = { change(null) }, enabled = draft.canClear) {
-            TableUI.provider.Text(texts.clear)
-        }
-    }
-    val done: @Composable () -> Unit = {
-        TableUI.provider.TextButton(
-            enabled = draft.valid,
-            onClick = {
-                draft.commit { state.setFilter(column.id, it) }
-                onDismiss()
-            }
-        ) { TableUI.provider.Text(texts.done) }
-    }
     if (presentation == TableFilterPresentation.Dialog) TableUI.provider.AlertDialog(
         onDismissRequest = onDismiss,
         title = { TableUI.provider.Text("${texts.filter}: ${column.title}") },
-        confirmButton = done,
-        dismissButton = clear,
+        confirmText = texts.done,
+        confirmEnabled = draft.valid,
+        onConfirmClick = {
+            draft.commit { state.setFilter(column.id, it) }
+            onDismiss()
+        },
+        dismissText = texts.clear,
+        dismissEnabled = draft.canClear,
+        onDismissClick = { change(null) },
         text = editor
     ) else TableUI.provider.DropdownMenu(expanded = true, onDismissRequest = onDismiss) {
         Column(
@@ -419,7 +412,9 @@ internal fun <Item> TableHeaderContext<Item>.FilterEditor(
             )
             editor()
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                clear()
+                TableUI.provider.TextButton(onClick = { change(null) }, enabled = draft.canClear) {
+                    TableUI.provider.Text(texts.clear)
+                }
             }
         }
     }

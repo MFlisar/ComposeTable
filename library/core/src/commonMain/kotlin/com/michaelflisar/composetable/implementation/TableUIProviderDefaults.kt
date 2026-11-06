@@ -115,6 +115,20 @@ fun TableUI.Provider.AlertDialog(
     onDismissRequest: () -> Unit,
     title: (@Composable () -> Unit)? = null,
     text: (@Composable () -> Unit)? = null,
-    confirmButton: @Composable () -> Unit,
-    dismissButton: (@Composable () -> Unit)? = null,
-) = AlertDialog(onDismissRequest, title, text, confirmButton, dismissButton)
+    confirmText: String,
+    onConfirmClick: () -> Unit,
+    confirmEnabled: Boolean = true,
+    dismissText: String? = null,
+    onDismissClick: (() -> Unit)? = null,
+    dismissEnabled: Boolean = true,
+) = AlertDialog(
+    onDismissRequest,
+    title,
+    text,
+    confirmText,
+    onConfirmClick,
+    confirmEnabled,
+    dismissText,
+    onDismissClick,
+    dismissEnabled,
+)
