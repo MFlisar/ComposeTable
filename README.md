@@ -30,7 +30,6 @@ paging, and selection, with Material 3 and ComposeStyled UI variants.
 | Module | Notes |
 |---|---|
 | material3 | A compose table implementation that uses [Material 3](https://kotlinlang.org/api/compose-multiplatform/material3/) components |
-| styled | A compose table implementation that uses [ComposeStyled](https://github.com/MFlisar/ComposeStyled) components |
 
 # :arrow_right: Versions
 
@@ -58,14 +57,12 @@ composetable = "<LATEST-VERSION>"
 [libraries]
 
 composetable-material3 = { module = "io.github.mflisar.composetable:material3", version.ref = "composetable" }
-composetable-styled = { module = "io.github.mflisar.composetable:styled", version.ref = "composetable" }
 ```
 
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
 implementation(libs.composetable.material3)
-implementation(libs.composetable.styled)
 ```
 
 </details>
@@ -82,7 +79,6 @@ Simply add the dependencies inside your **build.gradle.kts** file.
 val composetable = "<LATEST-VERSION>"
 
 implementation("io.github.mflisar.composetable:material3:${composetable}")
-implementation("io.github.mflisar.composetable:styled:${composetable}")
 ```
 
 </details>
