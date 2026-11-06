@@ -544,6 +544,7 @@ class ProviderConsistencyException(message: String) : IllegalStateException(mess
 /**
  * Binds a counted provider to table state. The provider must implement search, filters and sorting
  * globally and keep deterministic ordering. Call [ProviderTableModel.refresh] after mutations.
+ * Since item keys are used as LazyColumn keys, their values must be saveable in an Android Bundle.
  */
 @Composable
 fun <Item> rememberTable(

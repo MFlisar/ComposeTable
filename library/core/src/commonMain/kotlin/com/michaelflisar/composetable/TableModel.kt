@@ -6,6 +6,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 
 /**
@@ -177,7 +178,8 @@ class LocalTableModel<Item> internal constructor(
 /**
  * Initial items are evaluated once per model/state lifetime, not when columns or UI recompose.
  * Change data using insert/update/remove. Use a new composition key/state to switch data sources.
- * Keep item keys stable throughout this model's lifetime.
+ * Keep item keys stable throughout this model's lifetime. Since they are used as LazyColumn keys,
+ * the values must be saveable in an Android Bundle.
  */
 @Composable
 fun <Item> rememberTable(
@@ -186,7 +188,7 @@ fun <Item> rememberTable(
     state: TableState = rememberTableState(),
     itemKey: (Item) -> Any,
 ): LocalTableModel<Item> {
-    val latestKey = androidx.compose.runtime.rememberUpdatedState(itemKey)
+    val latestKey = rememberUpdatedState(itemKey)
     val table = remember(state) {
         LocalTableModel(initialItems(), columns, state) { latestKey.value(it) }
     }

@@ -27,6 +27,8 @@ import com.michaelflisar.composetable.implementation.HorizontalDivider
 import com.michaelflisar.composetable.implementation.LazyColumn
 import com.michaelflisar.composetable.implementation.TableUI
 import com.michaelflisar.composetable.implementation.VerticalDivider
+import com.michaelflisar.parcelize.Parcelable
+import com.michaelflisar.parcelize.Parcelize
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 sealed interface TableInteraction<Item> {
@@ -492,5 +494,8 @@ fun <Item> Table(
     }
 }
 
-private data class LoadedKey(val key: Any)
-private data class PlaceholderKey(val index: Int)
+// LazyColumn keys participate in saveable state; on Android they must be Bundle-compatible.
+@Parcelize
+private data class LoadedKey(val key: Any) : Parcelable
+@Parcelize
+private data class PlaceholderKey(val index: Int) : Parcelable

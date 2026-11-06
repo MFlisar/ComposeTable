@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.android.library.kmp)
     // org.jetbrains.kotlin
     alias(libs.plugins.jetbrains.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.parcelize)
     // org.jetbrains.compose
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
@@ -76,6 +77,7 @@ kotlin {
                 api(libs.jetbrains.compose.components.resources)
                 api(libs.jetbrains.compose.foundation)
                 api(libs.jetbrains.kotlinx.coroutines.core)
+                implementation(mflisar.kmp.parcelize)
                 implementation(libs.jetbrains.compose.material3)
                 implementation(libs.jetbrains.compose.material.icons.extended)
             }
