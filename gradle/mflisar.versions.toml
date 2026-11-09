@@ -19,7 +19,7 @@ composestyled =             "0.0.1-alpha09"
 
 # plugins only
 kmpicon =                   "1.0.0"
-kmpdevtools =               "9.3.0"
+kmpdevtools =               "9.3.3"
 
 # demos
 democomposables =           "1.0.5"
